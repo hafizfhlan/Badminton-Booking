@@ -23,7 +23,6 @@
     <link rel="stylesheet" href="./css/main.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 </head>
 
@@ -36,7 +35,7 @@
         <ul class="navbar-nav bg-gradient-warning sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/userdashboard">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/customer/dashboard">
                 
                 <div class="sidebar-brand-text mx-3">Booking Court System</div>
             </a>
@@ -130,9 +129,10 @@
       <div class="advisor_thumb" style="display: flex;justify-content: center;"><img src="https://bootdey.com/img/Content/avatar/avatar7.png"></div>
       <!-- Team Details-->
       <div class="single_advisor_details_info">
+        <p class="designation">ID: <%= userID %>
         <p class="designation">Name: <%= name %></p>
         <p class="designation">Email: <%= email %></p>
-        <p class="designation">ID:
+        <p class="designation">Phone No: <%= phoneNo %></p>
       </div>
     </div>
 

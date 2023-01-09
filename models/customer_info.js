@@ -7,6 +7,7 @@ var customer_infoSchema = new mongoose.Schema({
 	password: { type: String, required: true },
 	name: { type: String, required: true },
 	email: { type: String, required: true },
+	phoneNo : {type: String, required: true}
 });
 
 customer_infoSchema.pre("save", function (done) {

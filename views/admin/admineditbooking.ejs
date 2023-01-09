@@ -132,22 +132,22 @@
                                     
                                         
                                     <label class="labelInput" for="Date"><b>User</b></label><br>
-                                    <input class="inputBox" type="text" name="user" value="<%= data[0].userid %>"  readonly/><br><br>
+                                    <input class="inputBox" type="text" name="user" value="<%= customer %>"  readonly/><br><br>
 
                                     <label class="labelInput" for="Date"><b>Date</b></label><br>
-                                    <input class="inputBox" type="date" name="date" value="<%= data[0].bookdate %>"  /><br><br>
+                                    <input class="inputBox" type="date" name="date" value="<%= date %>"  /><br><br>
 
 
                                     <label class="labelInput" for="selectcourt"><b>Court</b></label><br>
                                     <select class="inputBox" name="court" value="" >
-                                        <option value="<%= data[0].court %>"><%= data[0].court %></option>
+                                        <option value="<%= court %>"><%= court %></option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
                                     </select><br><br>
 
                                     <label class="labelInput" for="Date"><b>Time</b></label><br>
-                                    <input class="inputBox" type="text" name="time" value="<%= data[0].booktime %>"/><br><br>
+                                    <input class="inputBox" type="text" name="time" value="<%= time %>"/><br><br>
 
                                     <input type="submit" id="aa" class="btn btn-success btn-icon-split" onclick="return confirm('Confirm the changes?')" style="margin:auto; display:block; width:100%;"></input>
                                     

@@ -7,7 +7,7 @@ var router = express.Router();
 
 var {AdminInfo} = require('../../models/admin_info')
 var {CustomerInfo} = require('../../models/customer_info');
-
+var {bookInfo} = require('../../models/book_info')
 const {courtInfo} = require('../../models/court')
 
 
@@ -60,6 +60,7 @@ router.get("/admineditcourt/:id", function(req, res){
     // })
     courtInfo.findById(req.params.id, (err, data) => {
         if(data) {
+            console.log(data)
             res.render("admin/admineditcourt", {data: data});
         } else {
             res.send("tak ada")
@@ -67,7 +68,32 @@ router.get("/admineditcourt/:id", function(req, res){
     })
 })
 
+router.get("/adminhistorybooking", function(req, res){
+    var d1, d2;
 
+    bookInfo.find({}, (err, data) => {
+        if(data) {
+            res.render('admin/adminhistorybooking', {data:data})
+        }
+    })  
 
+    
+})
+
+router.get("/admineditbooking/:id", function(req, res){
+    bookInfo.findOne({id: req.params.id }, function (err, data) {
+		if (data) {
+            console.log(data)
+			res.render("admin/admineditbooking", {
+				customer: data.customer, 
+				date: data.bookDate,
+                time: data.bookTime,
+                court: data.court
+			});
+		} else {
+			res.render("admindashboard");
+		}
+})
+})
 
 module.exports = router;

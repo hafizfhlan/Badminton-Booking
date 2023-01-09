@@ -37,7 +37,7 @@
         <ul class="navbar-nav bg-gradient-warning sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/userdashboard">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/customer/dashboard">
                 
                 <div class="sidebar-brand-text mx-3">Booking Court System</div>
             </a>
@@ -119,10 +119,10 @@
                         <label style="margin-left:25%;" for="date">Date</label><br>
                         <input style="margin:auto; display:block; width:50%;text-align: center;" name="date" type="date"  placeholder="Select Date" value="" /><br>
         
-                        <label style="margin-left:25%;" for="selectcourt">Select Court No</label><br>
+                        <label style="margin-left:25%;" for="selectcourt">Select Court</label><br>
                         <select class="form-control" name="court" style="margin:auto; display:block; width:50%;text-align: center;" >
                             <% for (var i = 0; i < data.length; i++){ %>
-                                <option value="<%= data[i].id %>"><%= data[i].name %></option>
+                                <option value="<%= data[i].name %>"><%= data[i].name %></option>
                             <% } %>
 
                         </select><br>

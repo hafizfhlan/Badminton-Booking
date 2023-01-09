@@ -18,6 +18,7 @@ router.post("/register", async function (req, res, next) {
 	if (
         !req.body.username ||
 		!req.body.email ||
+		!req.body.phoneNo||
 		!req.body.password ||
 		!req.body.passwordConf
 	) {
@@ -33,6 +34,7 @@ router.post("/register", async function (req, res, next) {
 					const data = new CustomerInfo({
                         name: req.body.username,
 						email: req.body.email,
+						phoneNo : req.body.phoneNo,
 						password: req.body.password,
 					});
 					data.save()
@@ -47,13 +49,39 @@ router.post("/register", async function (req, res, next) {
 	}
 });
 
+router.post("/login", function (req, res, next) {
+	CustomerInfo.findOne({
+		email: req.body.email
+	}, function (err, data) {
+		if (data) {
+			bcrypt
+				.compare(req.body.password, data.password)
+				.then((doMatch) => {
+					if (doMatch) {
+						req.session.email = data.email;
+						// session = req.session.email;
+						res.render("userdashboard");
+					} else {
+						alert("Wrong password input");
+					}
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		} else {
+			alert("Email and Password does not matched");
+		}
+	});
+});
+
 router.put("/updprofile", (req, res) =>{
 
 	email =  req.body.email;
 	name = req.body.name;
+	phoneNo = req.body.phoneNo;
 	customer = req.body.userID
 
-	CustomerInfo.findByIdAndUpdate((customer), {'name': name, 'email': email}, function(err, result){
+	CustomerInfo.findByIdAndUpdate((customer), {'name': name, 'email': email, 'phoneNo': phoneNo}, function(err, result){
 		if(err)
 		{
 			// res.json({status: "fail", message: "Customer failed to update"})
@@ -117,9 +145,9 @@ router.post("/editprofile", function (req, res, next) {
 router.post("/book", function (req, res, next) {
 	CustomerInfo.findOne({ email: req.body.email }, function (err, data) {
 		if(data) {
-			customer = data;
+			customerData = data;
 			const book1 = new Book.bookInfo({
-				custEmail: req.body.email,
+				userEmail: req.body.email,
 				bookDate: req.body.date,
 				bookTime: req.body.time,
 				court: req.body.court,

@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 
 var book_infoSchema = new mongoose.Schema({
-	custEmail: {type: String, required: true},
+	userEmail: {type: String, required: true},
 	vendorEmail:{type:String, required:true, default: "test@mail.com"},
 	bookDate:{type: Date, required:true},
 	bookTime:{type:Number, required:true},
