@@ -10,6 +10,8 @@
     <meta name="author" content="">
 
     <title>History Booking Court</title>
+    <link href="/img/favicon.png" rel="icon">
+    <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Custom fonts for this template -->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -44,7 +46,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="/admin/admindashboard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
@@ -129,8 +131,8 @@
                             <div class="card-body">
     
                                 <form method="post" action="/api/admin/updcourt?_method=PUT">
-                                    <label class="labelInput" style="cursor: pointer; margin:auto; display:block; text-align: center;" ><b>Court ID</b></label><br>
-                                    <input class="inputBox" type="text" name="courtId" value="<%= data.id %>" style="cursor: pointer; margin:auto; display:block; text-align: center;" readonly/><br>
+                                    <!-- <label class="labelInput" style="cursor: pointer; margin:auto; display:block; text-align: center;" ><b>Court ID</b></label><br> -->
+                                    <input class="inputBox" type="hidden" name="courtId" value="<%= data.id %>" style="cursor: pointer; margin:auto; display:block; text-align: center;" readonly/><br>
 
                                     <label class="labelInput" style="cursor: pointer; margin:auto; display:block; text-align: center;" ><b>Court Name</b></label><br>
                                     <input class="inputBox" type="text" name="courtName" value="<%= data.name %>" style="cursor: pointer; margin:auto; display:block; text-align: center;" /><br>
@@ -140,10 +142,11 @@
                                     <select class="form-control" name="status" style="margin-left: 25%;  display:block; width:50%; text-align: center;" >
                                         <option value="<%= data.status %>" selected readonly><%= (data.status).toUpperCase() %></option>
                                         <option value="available">Available</option>
-                                        <option value="not_available">Non-Available</option>
+                                        <option value="not available">Not-Available</option>
                                     </select><br><br>
                                     <input type="hidden" name="method" value="PUT">
-                                    <input type="submit" class="btn btn-success btn-icon-split" onclick="return confirm('Confirm the changes?')" style="cursor: pointer; margin:auto; display:block;"></input>
+                                <!-- <input type="submit" value="Register" id="aa" class="btn btn-sm btn-warning btn-user btn-block"> -->
+                                    <input type="submit" class="btn btn-sm  btn-success btn-icon-split" onclick="return confirm('Confirm the changes?')" style="cursor: pointer; margin:auto; display:block;"></input>
 
                             </form>
                         
@@ -174,12 +177,15 @@
     <!-- Custom scripts for all pages-->
     <script src="/js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="/js/demo/datatables-demo.js"></script>
+    <!-- Page level plugins -->
+<script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script>
+$(document).ready(function() {
+   $('#dataTable').DataTable();
+})
+</script>
 
     
     <% if(message.message) {%>

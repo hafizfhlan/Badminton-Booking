@@ -74,13 +74,6 @@ app.use('/scss', express.static(path.resolve(__dirname, "asset/scss")))
 app.use("/", require("./routes/web"));
 app.use("/api", require("./routes/api"));
 
-// app.use('/css', express.static(path.resolve(__dirname, "/asset/css")))
-// app.use('/img', express.static(path.resolve(__dirname, "/asset/img")))
-// app.use('/js', express.static(path.resolve(__dirname, "/asset/js")))
-// app.use('/scss', express.static(path.resolve(__dirname, "/asset/scss")))
-// app.use('/vendor', express.static(path.resolve(__dirname, "/asset/vendor")))
-
-
 /* Listening to the port 3000. */
 app.listen(app.get("port"), function () {
     console.log("Server started at port " + app.get("port"));

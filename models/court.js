@@ -4,7 +4,7 @@ var courtInfoSchema = new mongoose.Schema({
 	name: { type: String },
 	status: {
 		type: String,
-		enum: ['available', 'not_available'],
+		enum: ['available', 'not available'],
 		default: 'available'
 	}
 });

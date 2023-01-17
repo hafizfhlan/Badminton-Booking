@@ -8,6 +8,13 @@ var {
 const {
 	courtInfo
 } = require("../../models/court");
+const {
+	CustomerInfo
+} = require("../../models/customer_info");
+const {
+	bookInfo
+} = require("../../models/book_info");
+const { default: mongoose } = require("mongoose");
 
 
 var router = express.Router();
@@ -110,7 +117,7 @@ router.post("/adminaddcourt", function (req, res, next) {
 	});
 	data.save()
 		.then(() => {
-			alert("Court added successfully");
+			req.flash("message", "Court has been added successfully!")
 			res.redirect("/admin/adminaddcourt");
 		})
 		.catch((err) => console.log(err));
@@ -131,7 +138,7 @@ router.put("/updcourt", (req, res) => {
 		if (err) {
 			// res.json({status: "fail", message: "Court failed to update"})
 			req.flash("message", "Court failed to update")
-			res.redirect('/admin/admineditcourt/' + court)
+			res.redirect('/admin/admincourtmanage/' + court)
 		} else {
 			// res.json({status: "success", message: "Court has been to updated"})
 			req.flash("message", "Court has been updated!")
@@ -139,5 +146,62 @@ router.put("/updcourt", (req, res) => {
 		}
 	})
 })
+
+router.put("/updbook/:id", (req, res) =>{
+	bookDate = req.body.date;
+	bookTime = req.body.time;
+	court = req.body.court
+
+	bookInfo.findByIdAndUpdate(req.params.id, {'bookDate': bookDate, 'bookTime': bookTime, 'court': court}, function(err, result){
+		if(err)
+		{
+			// res.json({status: "fail", message: "Customer failed to update"})
+			req.flash("message", "Book failed to update")
+			res.redirect('/admin/admineditbooking/' + req.params.id)
+		}
+		else{
+			// res.json({status: "success", message: "Customer has been to updated"})
+			req.flash("message", "Book has been updated!")
+			res.redirect('/admin/admineditbooking/' + req.params.id)
+		}
+	})
+})
+
+router.get("/deluser/:id", (req,res) => {
+	CustomerInfo.findByIdAndRemove(req.params.id, function (err, result) {
+        if(!err) {
+            req.flash('message', 'User removed successfully!');
+            res.redirect('/admin/adminviewuser');
+        } else {
+            req.flash('message','Failed to removed the user!');
+            res.redirect('/admin/adminviewuser');
+        }
+    })}
+)
+
+router.get("/delcourt/:id", (req,res) => {
+	courtInfo.findByIdAndRemove(req.params.id, function (err, result) {
+        if(!err) {
+            req.flash('message', 'Court removed successfully!');
+            res.redirect('/admin/admincourtmanage');
+        } else {
+            req.flash('message','Failed to removed the court!');
+            res.redirect('/admin/admincourtmanage');
+        }
+    })}
+)
+
+router.get("/delbook/:id", (req,res) => {
+	bookInfo.findByIdAndRemove(req.params.id, function (err, result) {
+        if(!err) {
+            req.flash('message', 'Booking removed successfully!');
+            res.redirect('/admin/adminhistorybooking');
+        } else {
+            req.flash('message','Failed to removed the booking!');
+            res.redirect('/admin/adminhistorybooking');
+        }
+    })}
+)
+
 
 module.exports = router;

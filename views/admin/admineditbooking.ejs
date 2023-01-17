@@ -10,6 +10,8 @@
     <meta name="author" content="">
 
     <title>History Booking Court</title>
+    <link href="/img/favicon.png" rel="icon">
+    <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Custom fonts for this template -->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -44,7 +46,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="/admin/admindashboard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
@@ -127,28 +129,40 @@
                                 <h3>Modified Booking Report</h3>
                             </div>
                             <div class="card-body">
-    
-                                <form  method="post" action="/updbook">
-                                    
-                                        
-                                    <label class="labelInput" for="Date"><b>User</b></label><br>
-                                    <input class="inputBox" type="text" name="user" value="<%= customer %>"  readonly/><br><br>
+
+                                <form action="/api/admin/updbook/<%= id %>?_method=PUT" method="POST"> 
+ 
 
                                     <label class="labelInput" for="Date"><b>Date</b></label><br>
-                                    <input class="inputBox" type="date" name="date" value="<%= date %>"  /><br><br>
+                                    <% var d = data.bookDate
+                                    var dM = (d.getMonth()+1)
+                                    d = d.getFullYear() + '-' + dM.toString().padStart(2, '0') + '-'  + d.getDate().toString();
+                                    %>
+                                    <input class="inputBox" type="date" name="date" value="<%= d %>" style="form-control">
 
 
                                     <label class="labelInput" for="selectcourt"><b>Court</b></label><br>
-                                    <select class="inputBox" name="court" value="" >
-                                        <option value="<%= court %>"><%= court %></option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
+                                    <select class="inputBox" name="court" value="" style="form-control">
+                                        <option value="<%= data.court['_id'] %>" selected disabled><%= data.court['name']  %></option>
+                                        <%
+                                        for(var i=0;i<dataCourt.length;i++) {
+                                        %>
+                                            <option value="<%= dataCourt[i]._id %>"><%= dataCourt[i].name %></option>
+                                        <%
+                                        }
+                                        %>
                                     </select><br><br>
 
                                     <label class="labelInput" for="Date"><b>Time</b></label><br>
-                                    <input class="inputBox" type="text" name="time" value="<%= time %>"/><br><br>
+                                    <select class="form-control" name="time" style="form-control">
+                                        <option value="<%= data.bookTime %>" selected disabled><%= data.bookTime %></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+            
+                                    </select><br>
 
+                                    <input type="hidden" name="_method" value="PUT">
                                     <input type="submit" id="aa" class="btn btn-success btn-icon-split" onclick="return confirm('Confirm the changes?')" style="margin:auto; display:block; width:100%;"></input>
                                     
                                 </form>
@@ -186,13 +200,20 @@
     <!-- Custom scripts for all pages-->
     <script src="/js/sb-admin-2.min.js"></script>
 
+
     <!-- Page level plugins -->
-    <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="/js/demo/datatables-demo.js"></script>
-
+<script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script>
+$(document).ready(function() {
+   $('#dataTable').DataTable();
+})
+</script>
+    <% if(message.message) {%>
+        <script>
+            alert("<%= message.message %>")
+        </script>
+    <% } %>
 </body>
 
 </html>

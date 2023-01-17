@@ -38,6 +38,6 @@ router.get("/logout", function (req, res, next) {
 
 router.use("/customer", require("./customer"));
 router.use("/admin", require("./admin"));
-router.use("/staff", require("./staff"));
+// router.use("/staff", require("./staff"));
 
 module.exports = router;

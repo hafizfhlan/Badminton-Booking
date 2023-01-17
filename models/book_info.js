@@ -1,11 +1,10 @@
 var mongoose = require("mongoose");
 
 var book_infoSchema = new mongoose.Schema({
-	userEmail: {type: String, required: true},
-	vendorEmail:{type:String, required:true, default: "test@mail.com"},
+	user: {type: mongoose.Schema.Types.ObjectId, ref: 'customer'},
 	bookDate:{type: Date, required:true},
-	bookTime:{type:Number, required:true},
-	court: { type: String }
+	bookTime:{type:String, required:true},
+	court: {type: mongoose.Schema.Types.ObjectId, ref: 'court'},
 });
 
 const bookInfo = mongoose.model("book", book_infoSchema);

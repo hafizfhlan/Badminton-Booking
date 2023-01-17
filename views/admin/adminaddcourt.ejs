@@ -10,6 +10,8 @@
     <meta name="author" content="">
 
     <title>History Booking Court</title>
+    <link href="/img/favicon.png" rel="icon">
+    <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Custom fonts for this template -->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -44,7 +46,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="/admin/admindashboard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
@@ -139,8 +141,8 @@
                                     <select class="form-control" name="status"
                                         style="margin:auto; display:block; width:50%;text-align: center;">
                                         <option value="" selected hidden>Status</option>
-                                        <option value="Available">Available</option>
-                                        <option value="Non-Available">Non-Available</option>
+                                        <option value="available">Available</option>
+                                        <option value="not available">Not-Available</option>
                                     </select>
                                     <input type="submit" id="aa" class="btn btn-success btn-icon-split"
                                         onclick="return confirm('Sure Want To Add Court?')"
@@ -167,23 +169,30 @@
 
 
 
-            <!-- Bootstrap core JavaScript-->
-            <script src="vendor/jquery/jquery.min.js"></script>
-            <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-            <!-- Core plugin JavaScript-->
-            <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-            <!-- Custom scripts for all pages-->
-            <script src="js/sb-admin-2.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.min.js"></script>
 
-            <!-- Page level plugins -->
-            <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-            <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-            <!-- Page level custom scripts -->
-            <script src="js/demo/datatables-demo.js"></script>
-
+    <!-- Page level plugins -->
+<script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script>
+$(document).ready(function() {
+   $('#dataTable').DataTable();
+})
+</script>
+            <% if(message.message) {%>
+                <script>
+                    alert("<%= message.message %>")
+                </script>
+            <% } %>
 </body>
 
 </html>

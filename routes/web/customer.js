@@ -7,6 +7,18 @@ var {bookInfo} = require('../../models/book_info')
 
 const court = require("../../models/court")
 var router = express.Router();
+var nodemailer = require('nodemailer')
+
+var transport = nodemailer.createTransport({
+	host: "smtp.mailtrap.io",
+	port: 2525,
+	auth: {
+	  user: "375ca65ef99fb0",
+	  pass: "e0db19d4564fbd"
+	}
+  });
+
+ 
 
 router.get("/login", function(req, res){
     res.render("login");
@@ -20,7 +32,9 @@ router.get("/dashboard", function(req, res){
 
 
 router.get("/userprofile", function (req, res, next) {
-	CustomerInfo.findOne({ email: req.session.email }, function (err, data) {
+	console.log()
+	console.log(req.session.user)
+	CustomerInfo.findOne({ _id: req.session.user }, function (err, data) {
 		if (data) {
 			res.render("userprofile", {
 				name: data.name,
@@ -35,10 +49,10 @@ router.get("/userprofile", function (req, res, next) {
 });
 
 router.get("/editprofile", function(req, res){
-	CustomerInfo.findOne({ email: req.session.email }, function (err, data) {
+	CustomerInfo.findOne({ id: req.session.user }, function (err, data) {
 		if (data) {
 			res.render("editprofile", {
-				name: data.name, 
+				name: data.name,   
 				email: data.email, 
 				phoneNo: data.phoneNo,
 				userID: data.id
@@ -50,9 +64,8 @@ router.get("/editprofile", function(req, res){
 })
 
 router.get("/book", function(req, res){
-	court.courtInfo.find({}, (err, data) => {
-		res.render("bookingcourt", {email: req.session.email, data: data});
-
+	court.courtInfo.find({status:'available'}, (err, data) => {
+		res.render("bookingcourt", {id: req.session.user, data: data});
 	})
     
 })
@@ -70,18 +83,26 @@ router.get("/book", function(req, res){
 // })
 
 router.get("/history",(req, res,)=>{
-	
-	console.log(req.session);
+	bookInfo.find({user: req.session.user}).populate({
+		
+		path: "user",
+		select: {'password':0}
+	}).populate({
+		path: "court",
+	}).exec().then((data) => {
+		res.render("history.ejs",{data:data})
+	})
+	// console.log(req.session);
 
-	bookInfo.find(({userEmail: req.session.email}),(err, docs) => {
-	if (!err) {
-		res.render("history.ejs", {
-			data: docs
-		});
-	} else {
-		console.log('Failed to retrieve the booking List: ' + err);
-	}
-	});
+	// bookInfo.find(({userEmail: req.session.email}),(err, docs) => {
+	// if (!err) {
+	// 	res.render("history.ejs", {
+	// 		data: docs
+	// 	});
+	// } else {
+	// 	console.log('Failed to retrieve the booking List: ' + err);
+	// }
+	// });
 	
 	
 

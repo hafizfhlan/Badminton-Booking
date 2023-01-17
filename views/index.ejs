@@ -11,11 +11,13 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="img/favicon.png" rel="icon">
-  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="/img/favicon.png" rel="icon">
+  <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="/vendor/vendor/aos/aos.css" rel="stylesheet">
@@ -25,9 +27,26 @@
   <link href="/vendor/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="/vendor/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
+  <!-- leaflet css  -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@v0.74.0/dist/L.Control.Locate.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.74.4/dist/L.Control.Locate.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+  <!-- leaflet js  -->
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.74.0/dist/L.Control.Locate.min.js" charset="utf-8">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@v0.74.0/dist/L.Control.Locate.min.js" charset="utf-8">
+  </script>
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
   <!-- Template Main CSS File -->
   <link href="/asset/css/style.css" rel="stylesheet">
-  <script src="js/main.js"></script>
+  <script src="/js/main.js"></script>
 </head>
 
 <body>
@@ -47,6 +66,7 @@
           <!-- <li><a class="nav-link scrollto" href="#us">Us</a></li> -->
           <li><a class="nav-link scrollto" href="#counts">Service</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          <li><a class="nav-link scrollto" href="#map">Maps</a></li>
           <li><a class="getstarted scrollto" href="/login">Log In</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -65,7 +85,8 @@
           <h2 data-aos="fade-up" data-aos-delay="400">We serve court for playing Badminton</h2>
           <div data-aos="fade-up" data-aos-delay="600">
             <div class="text-center text-lg-start">
-              <a href="/login" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+              <a href="/login"
+                class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
                 <span>Get Started</span>
                 <i class="bi bi-arrow-right"></i>
               </a>
@@ -80,10 +101,10 @@
 
   </section><!-- End Hero -->
 
-  
 
-    <!-- ======= Values Section ======= -->
-    <!-- <section id="us" class="values">
+
+  <!-- ======= Values Section ======= -->
+  <!-- <section id="us" class="values">
 
       <div class="container" data-aos="fade-up">
 
@@ -125,108 +146,198 @@
     </section>
     End Values Section -->
 
-    <!-- ======= Counts Section ======= -->
-    <section id="counts" class="counts">
-      <div class="container" data-aos="fade-up">
+  <!-- ======= Counts Section ======= -->
+  <section id="counts" class="counts">
+    <div class="container" data-aos="fade-up">
 
-        <div class="row gy-4">
+      <div class="row gy-4">
 
-          <div class="col-lg-3 col-md-6">
-            <div class="count-box">
-              <i class="bi bi-emoji-smile"></i>
-              <div>
-                <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Happy Players</p>
-              </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="count-box">
+            <i class="bi bi-emoji-smile"></i>
+            <div>
+              <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1"
+                class="purecounter"></span>
+              <p>Happy Players</p>
             </div>
           </div>
+        </div>
 
-          <div class="col-lg-3 col-md-6">
-            <div class="count-box">
-              <i class="bi bi-journal-richtext" style="color: #ee6c20;"></i>
-              <div>
-                <span data-purecounter-start="0" data-purecounter-end="100" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Ratings</p>
-              </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="count-box">
+            <i class="bi bi-journal-richtext" style="color: #ee6c20;"></i>
+            <div>
+              <span data-purecounter-start="0" data-purecounter-end="100" data-purecounter-duration="1"
+                class="purecounter"></span>
+              <p>Ratings</p>
             </div>
           </div>
+        </div>
 
-          <div class="col-lg-3 col-md-6">
-            <div class="count-box">
-              <i class="bi bi-headset" style="color: #15be56;"></i>
-              <div>
-                <span data-purecounter-start="0" data-purecounter-end="74" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Hours Of Support</p>
-              </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="count-box">
+            <i class="bi bi-headset" style="color: #15be56;"></i>
+            <div>
+              <span data-purecounter-start="0" data-purecounter-end="74" data-purecounter-duration="1"
+                class="purecounter"></span>
+              <p>Hours Of Support</p>
             </div>
           </div>
+        </div>
 
-          <div class="col-lg-3 col-md-6">
-            <div class="count-box">
-              <i class="bi bi-people" style="color: #bb0852;"></i>
-              <div>
-                <span data-purecounter-start="0" data-purecounter-end="291" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Satisfied</p>
-              </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="count-box">
+            <i class="bi bi-people" style="color: #bb0852;"></i>
+            <div>
+              <span data-purecounter-start="0" data-purecounter-end="291" data-purecounter-duration="1"
+                class="purecounter"></span>
+              <p>Satisfied</p>
             </div>
           </div>
-
         </div>
 
       </div>
-    </section><!-- End Counts Section -->
+
+    </div>
+  </section><!-- End Counts Section -->
 
 
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
+  <!-- ======= Contact Section ======= -->
+  <section id="contact" class="contact">
 
-      <div class="container" data-aos="fade-up">
+    <div class="container" data-aos="fade-up">
 
-        <header class="section-header">
-          <h2>Contact</h2>
-          <p>Contact Us</p>
-        </header>
+      <header class="section-header">
+        <h2>Contact</h2>
+        <p>Contact Us</p>
+      </header>
 
-            <div class="row gy-4">
-              <div class="col-md-6">
-                <div class="info-box">
-                  <i class="bi bi-geo-alt"></i>
-                  <h3>Address</h3>
-                  <p>A108 Adam Street,<br>New York, NY 535022</p>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="info-box">
-                  <i class="bi bi-telephone"></i>
-                  <h3>Call Us</h3>
-                  <p>+0123456789<br>+0109876543</p>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="info-box">
-                  <i class="bi bi-envelope"></i>
-                  <h3>Email Us</h3>
-                  <p>Badminton@example.com<br>Badminton2@example.com</p>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="info-box">
-                  <i class="bi bi-clock"></i>
-                  <h3>Open Hours</h3>
-                  <p>Monday - Friday<br>9:00AM - 12:00AM</p>
-                </div>
-              </div>
-            </div>
-
-          
+      <div class="row gy-4">
+        <div class="col-md-6">
+          <div class="info-box">
+            <i class="bi bi-geo-alt"></i>
+            <h3>Address</h3>
+            <p>A108 Adam Street,<br>New York, NY 535022</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="info-box">
+            <i class="bi bi-telephone"></i>
+            <h3>Call Us</h3>
+            <p>+0123456789<br>+0109876543</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="info-box">
+            <i class="bi bi-envelope"></i>
+            <h3>Email Us</h3>
+            <p>Badminton@example.com<br>Badminton2@example.com</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="info-box">
+            <i class="bi bi-clock"></i>
+            <h3>Open Hours</h3>
+            <p>Monday - Friday<br>9:00AM - 12:00AM</p>
+          </div>
+        </div>
       </div>
 
-    </section><!-- End Contact Section -->
+
+    </div>
+
+  </section><!-- End Contact Section -->
+
+
+  <!-- ======= Hero Map ======= -->
+  <section id="hero" class="hero d-flex align-items-center">
+
+    <div class="container">
+      <style>
+        body {
+          margin: 100;
+          padding: 100;
+        }
+
+        #map {
+          width: 100%;
+          height: 100vh;
+        }
+      </style>
+
+      <div class="dummy-text">
+        <div id="map"></div>
+      </div>
+
+      <script>
+        // Map initialization 
+        var map = L.map('map').setView([3.0733, 101.5185], 11);
+
+
+        /* ==================================================
+        |                 MAP VARIATION
+        =====================================================*/
+
+        //osm layer
+        var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        });
+        //osm.addTo(map);
+
+        //google street
+        googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+          maxZoom: 20,
+          subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
+        googleStreets.addTo(map)
+
+        //google satellite
+        googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+          maxZoom: 20,
+          subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
+        // googleSat.addTo(map)
+
+        /* ==================================================
+        |                 LAYER CONTROL 
+        =====================================================*/
+
+        //layer controller
+        var baseMaps = {
+          "OSM": osm,
+          'Google Street': googleStreets,
+          "Google Satellite": googleSat
+        };
+
+        L.control.layers(baseMaps).addTo(map);
+
+
+        /* ==================================================
+        |                 MARKING
+        =====================================================*/
+        var singleMaker = L.marker([3.0698, 101.5037]);
+        var popup = singleMaker.bindPopup('Badminton Court').openPopup()
+        popup.addTo(map);
+
+
+        console.log(singleMaker.toGeoJSON())
+
+
+        L.control.locate().addTo(map);
+
+        /* ==================================================
+        |                 SEARCH
+        =====================================================*/
+        L.Control.geocoder().addTo(map);
+      </script>
+    </div>
+
+  </section>
+  <!-- End Map -->
+
 
   </main><!-- End #main -->
 
-  
-   
 
   <!-- Vendor JS Files -->
   <script src="/vendor/vendor/purecounter/purecounter.js"></script>
@@ -238,7 +349,7 @@
   <script src="/vendor/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="js/main.js"></script>
+  <script src="/js/main.js"></script>
 
 </body>
 

@@ -10,9 +10,11 @@
     <meta name="author" content="">
 
     <title>Login Booking System</title>
+    <link href="/img/favicon.png" rel="icon">
+    <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -21,38 +23,6 @@
     <link href="/asset/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
-<script type="text/javascript">
-    $(document).ready(function(){
-
-        $( "#form" ).submit(function(event) {
-            event.preventDefault();
-
-            $.ajax({
-                type: 'POST',
-                url: '/login',
-                data: $('#form').serialize(),
-                dataType: "json",
-                success: function(response){
-                    //alert("a");
-                    //console.log(response.Success);
-                    $('#form')[0].reset();
-
-                    document.getElementById("check").innerHTML=response.Success;
-                         //ADD THIS CODE
-                         setTimeout(function(){
-                             document.getElementById("check").innerHTML="";
-                         },3000);
-                         if (response.Success=="Success!") {
-                             location.href = '/customer/dashboard'
-                         };
-                     },
-                     error: function() {
-                     }
-                 })
-        });
-
-    });
-</script>
 <body class="bg-gradient-warning">
 
     <div class="container">
@@ -72,7 +42,7 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <form class="user"id="form" method="post" action="/api/customer/userdashboard">
+                                    <form class="user"id="form" method="post" action="/api/customer/login">
                                         <div class="form-group">
                                             <input type="email" name="email" class="form-control form-control-user" placeholder="Enter Email Address...">
                                         </div>
@@ -89,7 +59,7 @@
                                     <div class="text-center">
                                         <a class="small" href="/register">Create an Account!</a>
                                         <br>
-                                        <a class="small" href="/guestbooking">Guest Mode</a>
+                                        <!-- <a class="small" href="/guestbooking">Guest Mode</a> -->
 
                                     </div>
                                 </div>
@@ -105,15 +75,47 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="/js/sb-admin-2.min.js"></script>
 
+    <!-- <script type="text/javascript">
+        $(document).ready(function(){
+    
+            $( "#form" ).submit(function(event) {
+                event.preventDefault();
+    
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/customer/login',
+                    data: $('#form').serialize(),
+                    dataType: "json",
+                    success: function(response){
+                        //alert("a");
+                        //console.log(response.Success);
+                        $('#form')[0].reset();
+    
+                        document.getElementById("check").innerHTML=response.Success;
+                             //ADD THIS CODE
+                             setTimeout(function(){
+                                 document.getElementById("check").innerHTML="";
+                             },3000);
+                             if (response.Success=="Success!") {
+                                 location.href = '/customer/dashboard'
+                             };
+                         },
+                         error: function() {
+                         }
+                     })
+            });
+    
+        });
+    </script> -->
 </body>
 
 </html>
