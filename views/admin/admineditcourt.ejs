@@ -38,7 +38,7 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admindashboard">
-                
+
                 <div class="sidebar-brand-text mx-3">Booking Court System</div>
             </a>
 
@@ -74,7 +74,7 @@
                     <i class="fas fa-fw fa-table"></i>
                     <span>History Booking</span></a>
             </li>
-           
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -84,7 +84,7 @@
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
-           
+
 
         </ul>
         <!-- End of Sidebar -->
@@ -103,96 +103,121 @@
                     <span>Admin Dashboard</span>
                     <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - User Information -->
-                            <button class="w3-button w3-hover-light-grey"><a href="/logout">Log out</a></button>
+                        <button class="w3-button w3-hover-light-grey"><a href="/logout">Log out</a></button>
                     </ul>
                 </nav>
                 <!-- End of Topbar -->
 
-    
-                <!-- Content Row -->
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
 
-            <!-- Page Heading -->
-            <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    
-    
-            </div>
-    
-            <!-- Content Row -->
-            <div class="row">
-    
-    
-                <div class="card shadow mb-4" style="width: 40%; margin:auto; display:block;">
-    
+                <!-- Content Row -->
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+
+
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+
+
+                        <div class="card shadow mb-4" style="width: 40%; margin:auto; display:block;">
+
                             <div class="card-header py-3" style="text-align:center;">
                                 <h3>Edit Court</h3>
                             </div>
                             <div class="card-body">
-    
+
                                 <form method="post" action="/api/admin/updcourt?_method=PUT">
                                     <!-- <label class="labelInput" style="cursor: pointer; margin:auto; display:block; text-align: center;" ><b>Court ID</b></label><br> -->
-                                    <input class="inputBox" type="hidden" name="courtId" value="<%= data.id %>" style="cursor: pointer; margin:auto; display:block; text-align: center;" readonly/><br>
+                                    <input class="inputBox" type="hidden" name="courtId" value="<%= data.id %>"
+                                        style="cursor: pointer; margin:auto; display:block; text-align: center;"
+                                        readonly /><br>
 
-                                    <label class="labelInput" style="cursor: pointer; margin:auto; display:block; text-align: center;" ><b>Court Name</b></label><br>
-                                    <input class="inputBox" type="text" name="courtName" value="<%= data.name %>" style="cursor: pointer; margin:auto; display:block; text-align: center;" /><br>
-                                    
-                                    
-                                    <label style="cursor: pointer; margin:auto; display:block; text-align: center; " ><b>Status</b></label><br>
-                                    <select class="form-control" name="status" style="margin-left: 25%;  display:block; width:50%; text-align: center;" >
-                                        <option value="<%= data.status %>" selected readonly><%= (data.status).toUpperCase() %></option>
+                                    <label class="labelInput"
+                                        style="cursor: pointer; margin:auto; display:block; text-align: center;"><b>Court
+                                            Name</b></label><br>
+                                    <input class="inputBox" type="text" name="courtName" value="<%= data.name %>"
+                                        style="cursor: pointer; margin:auto; display:block; text-align: center;"
+                                        required /><br>
+
+
+                                    <label
+                                        style="cursor: pointer; margin:auto; display:block; text-align: center; "><b>Status</b></label><br>
+                                    <select class="form-control" name="status"
+                                        style="margin-left: 25%;  display:block; width:50%; text-align: center;"
+                                        required>
+                                        <option value="<%= data.status %>" selected readonly>
+                                            <%= (data.status).toUpperCase() %></option>
                                         <option value="available">Available</option>
                                         <option value="not available">Not-Available</option>
                                     </select><br><br>
                                     <input type="hidden" name="method" value="PUT">
-                                <!-- <input type="submit" value="Register" id="aa" class="btn btn-sm btn-warning btn-user btn-block"> -->
-                                    <input type="submit" class="btn btn-sm  btn-success btn-icon-split" onclick="return confirm('Confirm the changes?')" style="cursor: pointer; margin:auto; display:block;"></input>
+                                    <!-- <input type="submit" value="Register" id="aa" class="btn btn-sm btn-warning btn-user btn-block"> -->
+                                    <!-- <input type="submit" class="btn  btn-success btn-icon-split" onclick="return confirm('Confirm the changes?')" style="cursor: pointer; margin:auto; display:block;"></input> -->
+                                    <input type="submit" id="aa" class="btn btn-sm btn-warning btn-icon-split"
+                                        onclick="return confirm('Confirm the changes?')"
+                                        style="margin:auto; display:block; margin-top:auto; width:50%;"></input>
 
-                            </form>
-                        
-                    
-                        
+                                </form>
+
+
+
                             </div>
+                        </div>
+                    </div>
+                    <!-- End of Main Content -->
+
+
+
                 </div>
+                <!-- End of Content Wrapper -->
+
             </div>
-            <!-- End of Main Content -->
-
-            
-
-        </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="/js/sb-admin-2.min.js"></script>
+            <!-- End of Page Wrapper -->
 
 
-    <!-- Page level plugins -->
-<script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<script>
-$(document).ready(function() {
-   $('#dataTable').DataTable();
-})
-</script>
 
-    
-    <% if(message.message) {%>
-        <script>
-            alert("<%= message.message %>")
-        </script>
-    <% } %>
+            <!-- Bootstrap core JavaScript-->
+            <script src="/vendor/jquery/jquery.min.js"></script>
+            <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+            <!-- Core plugin JavaScript-->
+            <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+            <!-- Custom scripts for all pages-->
+            <script src="/js/sb-admin-2.min.js"></script>
+
+
+            <!-- Page level plugins -->
+            <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+            <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $('#dataTable').DataTable();
+
+                    $("#accordionSidebar a").each(function (index, element) {
+                        if ($(element).attr('href') == window.location.pathname) {
+                            if ($(element).hasClass('collapse-item') == true) {
+                                $(element).parent().parent().parent().addClass("active");
+                                $(element).parent().parent().addClass("show");
+                                $(element).addClass("active");
+                            } else {
+                                $(element).parent().addClass("active");
+                            }
+                        }
+                    });
+                })
+            </script>
+
+
+            <% if(message.message) {%>
+            <script>
+                alert("<%= message.message %>")
+            </script>
+            <% } %>
 </body>
 
 </html>

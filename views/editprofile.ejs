@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,7 +37,7 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/customer/dashboard">
-                
+
                 <div class="sidebar-brand-text mx-3">Booking Court System</div>
             </a>
 
@@ -46,7 +45,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-             <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link" href="/customer/dashboard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
@@ -67,6 +66,13 @@
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Booking Court</span></a>
             </li>
+            <!-- Nav Item - Cancel Booking -->
+            <hr class="sidebar-divider">
+            <li class="nav-item">
+                <a class="nav-link" href="/customer/cancelbooking">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Cancel Booking</span></a>
+            </li>
             <hr class="sidebar-divider">
             <!-- Nav Item - Tables -->
             <li class="nav-item">
@@ -83,7 +89,7 @@
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
-           
+
 
         </ul>
         <!-- End of Sidebar -->
@@ -100,75 +106,96 @@
                     <span>User Dashboard</span>
                     <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - User Information -->
-                            <button class="w3-button w3-hover-light-grey"><a href="/logout">Log out</a></button>
+                        <button class="w3-button w3-hover-light-grey"><a href="/logout">Log out</a></button>
                     </ul>
                 </nav>
                 <!-- End of Topbar -->
-<div class="row">
+                <div class="row">
 
 
-    <div class="card shadow mb-4" style="width: 40%; margin:auto; display:block;">
+                    <div class="card shadow mb-4" style="width: 40%; margin:auto; display:block;">
 
-                <div class="card-header py-3" style="text-align:center;">
-                    <h3>My Profile</h3>
+                        <div class="card-header py-3" style="text-align:center;">
+                            <h3>My Profile</h3>
+                        </div>
+                        <div class="card-body">
+                            <form action="/api/customer/updprofile?_method=PUT" method="POST">
+                                <input type="hidden" name="userID" value="<%= userID %>">
+                                <div class="jarakInput ">
+                                    <label for="name"><a>Name : </a></label>
+                                    <input type="text" name="name" required value="<%= name %> "
+                                        class="form-control form-control-user">
+                                </div>
+
+                                <hr class="sidebar-divider">
+
+                                <div class="jarakInput">
+                                    <label for="uname"><a>Email :</a></label>
+                                    <input type="email" name="email" required value="<%= email %>"
+                                        class="form-control form-control-user">
+                                </div>
+
+                                <hr class="sidebar-divider">
+
+                                <div class="jarakInput">
+                                    <label for="phoneNo"><a>Phone No :</a></label>
+                                    <input type="phoneNo" name="phoneNo" required value="<%= phoneNo %> "
+                                        class="form-control form-control-user">
+                                </div>
+
+                                <hr class="sidebar-divider">
+
+
+                                <!-- belum setel lagi-->
+                                <input type="hidden" name="_method" value="PUT">
+                                <input type="submit" class="btn btn-warning btn-user btn-block"
+                                    onclick="return confirm('Are you confirm?')">
+                            </form>
+
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                   <form action="/api/customer/updprofile?_method=PUT" method="POST"> 
-                    <input type="hidden" name="userID" value="<%= userID %>">
-                        <div class="jarakInput ">
-                            <label for="name"><a>Name : </a></label>
-                            <input type="text" name="name" value="<%= name %> " class="form-control form-control-user" >
-                        </div>
 
-                        <hr class="sidebar-divider">
 
-                        <div class="jarakInput">
-                            <label for="uname"><a>Email :</a></label>
-                            <input type="email" name="email" value="<%= email %> "class="form-control form-control-user" >
-                        </div>
-                        
-                        <hr class="sidebar-divider">
+                <!-- Bootstrap core JavaScript-->
+                <script src="/vendor/jquery/jquery.min.js"></script>
+                <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-                        <div class="jarakInput">
-                            <label for="phoneNo"><a>Phone No :</a></label>
-                            <input type="phoneNo" name="phoneNo" value="<%= phoneNo %> "class="form-control form-control-user" >
-                        </div>
+                <!-- Core plugin JavaScript-->
+                <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-                        <hr class="sidebar-divider">
+                <!-- Custom scripts for all pages-->
+                <script src="/js/sb-admin-2.min.js"></script>
 
-                        
-                        <!-- belum setel lagi-->
-                        <input type="hidden" name="_method" value="PUT">
-                        <input type="submit"   class="btn btn-warning btn-user btn-block" onclick="return confirm('Are you confirm?')">
-                    </form>
-                    
-                </div>
-    </div>
-</div>
+                <!-- Page level plugins -->
+                <script src="/vendor/chart.js/Chart.min.js"></script>
 
-    
-    <!-- Bootstrap core JavaScript-->
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                <!-- Page level custom scripts -->
+                <script src="/js/demo/chart-area-demo.js"></script>
+                <script src="/js/demo/chart-pie-demo.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+                <script>
+                    $(document).ready(function () {
+                        $('#dataTable').DataTable();
 
-    <!-- Custom scripts for all pages-->
-    <script src="/js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="/vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="/js/demo/chart-area-demo.js"></script>
-    <script src="/js/demo/chart-pie-demo.js"></script>
-
-    <% if(message.message) {%>
-        <script>
-            alert("<%= message.message %>")
-        </script>
-    <% } %>
+                        $("#accordionSidebar a").each(function (index, element) {
+                            if ($(element).attr('href') == window.location.pathname) {
+                                if ($(element).hasClass('collapse-item') == true) {
+                                    $(element).parent().parent().parent().addClass("active");
+                                    $(element).parent().parent().addClass("show");
+                                    $(element).addClass("active");
+                                } else {
+                                    $(element).parent().addClass("active");
+                                }
+                            }
+                        });
+                    })
+                </script>
+                <% if(message.message) {%>
+                <script>
+                    alert("<%= message.message %>")
+                </script>
+                <% } %>
 </body>
 
 </html>

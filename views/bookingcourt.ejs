@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-    
-    
+
+
 
 <head>
 
@@ -21,12 +21,18 @@
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-        <!-- if calendar option is true -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <!-- if calendar option is true -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
     <!-- Custom styles for this template-->
     <link href="/asset/css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <!-- Custom styles for this page -->
+    <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/1.1.2/js/bootstrap-multiselect.min.js"
+        rel="stylesheet">
 
 </head>
 
@@ -40,7 +46,7 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/customer/dashboard">
-                
+
                 <div class="sidebar-brand-text mx-3">Booking Court System</div>
             </a>
 
@@ -48,8 +54,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-             <!-- Nav Item - Dashboard -->
-             <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link" href="/customer/dashboard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
@@ -57,7 +62,6 @@
 
             <!-- Divider -->
             <hr class="sidebar-divider">
-
             <li class="nav-item">
                 <a class="nav-link" href="/customer/userprofile">
                     <i class="fa fa-user"></i>
@@ -69,6 +73,13 @@
                 <a class="nav-link" href="/customer/book">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Booking Court</span></a>
+            </li>
+            <!-- Nav Item - Cancel Booking -->
+            <hr class="sidebar-divider">
+            <li class="nav-item">
+                <a class="nav-link" href="/customer/cancelbooking">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Cancel Booking</span></a>
             </li>
             <hr class="sidebar-divider">
             <!-- Nav Item - Tables -->
@@ -86,7 +97,7 @@
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
-           
+
 
         </ul>
         <!-- End of Sidebar -->
@@ -103,91 +114,212 @@
                     <span>User Dashboard</span>
                     <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - User Information -->
-                            <button class="w3-button w3-hover-light-grey"><a href="/logout">Log out</a></button>
+                        <button class="w3-button w3-hover-light-grey"><a href="/logout">Log out</a></button>
                     </ul>
                 </nav>
                 <!-- End of Topbar -->
-         
-            <!-- main -->
-            <div class="card shadow mb-4" style="width: 40%; margin:auto; display:block;">
-                <div class="card-header py-3" style="text-align:center;">
-                    <h3>Booking Court</h3>
-                </div>
-                <div class="card-body">
-                    <form class="upload-form" id="form2" method="post" action="/api/customer/book">
-                        <input type="hidden" name="id" value="<%= id %>">
 
-                        <label style="margin-left:25%;" for="date">Date</label><br>
-                            <input style="margin:auto; display:block; width:50%;text-align: center;" name="date" type="date"  placeholder="Select Date" value="" /><br>
+                <!-- main -->
+                <div class="row">
+                    <div class="card shadow mb-4" style="width: 40%; margin:auto; display:block;">
+                        <div class="card-header py-3" style="text-align:center;">
+                            <h3>Booking Court</h3>
+                        </div>
+                        <div class="card-body">
+                            <form class="upload-form" id="form2" method="post" action="/api/customer/book">
+                                <input type="hidden" name="id" value="<%= id %>">
 
-                        <label style="margin-left:25%;" for="selectcourt">Time Available</label><br>
-                        <select class="form-control" name="time" style="margin:auto; display:block; width:50%;text-align: center;" >
-                            <option value="" selected hidden>Time Available</option>
-                            <option value="12:00 - 13:00">12:00 - 13:00</option>
-                            <option value="13:00 - 14:00">13:00 - 14:00</option>
-                            <option value="14:00 - 15:00">14:00 - 15:00</option>
-                            <option value="15:00 - 16:00">15:00 - 16:00</option>
-                            <option value="16:00 - 17:00">16:00 - 17:00</option>
-                            <option value="17:00 - 18:00">17:00 - 18:00</option>
-                            <option value="18:00 - 19:00">18:00 - 19:00</option>
-                            <option value="19:00 - 20:00">19:00 - 20:00</option>
-
-                        </select><br>
+                                <label style="margin-left:25%;" for="date">Date</label><br>
+                                <input style="margin:auto; display:block; width:50%;text-align: center;" id="date"
+                                    name="date" type="date" placeholder="Select Date" value="" required /><br>
 
 
-                            
-            
-                            <label style="margin-left:25%;" for="selectcourt">Select Court</label><br>
-                            <select class="form-control" name="court" style="margin:auto; display:block; width:50%;text-align: center;" >
-                                <% for (var i = 0; i < data.length; i++){ %>
+                                <label style="margin-left:25%;" for="selectcourt">Select Court</label><br>
+                                <select class="form-control" id="court" name="court"
+                                    style="margin:auto; display:block; width:50%;text-align: center;" required>
+                                    <option value="" selected disabled>Select Court</option>
+                                    <% for (var i = 0; i < data.length; i++){ %>
                                     <option value="<%= data[i]._id %>"><%= data[i].name %></option>
-                                <% } %>
-                        </select><br>
-                    
-                       <!-- <input class="btn btn-success btn-icon-split" href="tables.html" style=" margin:auto; display:block; margin-top:30px; width:50%;" type="submit" name="submit" value="submit" /> -->
-                    <input type="submit" id="aa" class="btn btn-sm btn-warning btn-icon-split" onclick="return confirm('Confirm booking?')" style="margin:auto; display:block; margin-top:30px; width:50%;"></input>
+                                    <% } %>
+                                </select><br>
 
-                    </form>
+                                <label style="margin-left:25%;" for="selectcourt">Time Available</label><br>
+                                <select class="form-control" id="time" name="time"
+                                    style="margin:auto; display:block; width:50%;text-align: center;" required>
+                                    <option value="" selected disabled>Time Available</option>
+                                    <option value="09:01 - 10:00">09:01 - 10:00</option>
+                                    <option value="10:01 - 11:00">10:01 - 11:00</option>
+                                    <option value="11:01 - 12:00">11:01 - 12:00</option>
+                                    <option value="12:01 - 13:00">12:01 - 13:00</option>
+                                    <option value="13:01 - 14:00">13:01 - 14:00</option>
+                                    <option value="14:01 - 15:00">14:01 - 15:00</option>
+                                    <option value="15:01 - 16:00">15:01 - 16:00</option>
+                                    <option value="16:01 - 17:00">16:01 - 17:00</option>
+                                    <option value="17:01 - 18:00">17:01 - 18:00</option>
+                                    <option value="18:01 - 19:00">18:01 - 19:00</option>
+                                    <option value="19:01 - 20:00">19:01 - 20:00</option>
+                                    <option value="20:01 - 21:00">20:01 - 21:00</option>
+                                    <option value="21:01 - 22:00">21:01 - 22:00</option>
+                                    <option value="22:01 - 23:00">22:01 - 23:00</option>
+                                    <option value="23:01 - 00:00">23:01 - 00:00</option>
 
+                                </select><br>
+
+                                <label style="margin-left:25%;" id="pp"></label><br>
+                                <input type="hidden" name="price" id="price" />
+                                <!-- <input class="btn btn-success btn-icon-split" href="tables.html" style=" margin:auto; display:block; margin-top:30px; width:50%;" type="submit" name="submit" value="submit" /> -->
+                                <input type="submit" id="aa" class="btn btn-sm btn-warning btn-icon-split"
+                                    onclick="return confirm('Confirm booking?')"
+                                    style="margin:auto; display:block; margin-top:30px; width:50%;"></input>
+
+                            </form>
+
+                        </div>
+                    </div>
                 </div>
-            </div>
-            
 
 
 
 
 
-    
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
 
-    
-    <!-- Bootstrap core JavaScript-->
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                <!-- Scroll to Top Button-->
+                <a class="scroll-to-top rounded" href="#page-top">
+                    <i class="fas fa-angle-up"></i>
+                </a>
 
-    <!-- Core plugin JavaScript-->
-    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="/js/sb-admin-2.min.js"></script>
+                <!-- Bootstrap core JavaScript-->
+                <script src="/vendor/jquery/jquery.min.js"></script>
+                <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
- 
-    <!-- Page level plugins -->
-<script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<script>
-$(document).ready(function() {
-   $('#dataTable').DataTable();
-})
-</script>
-<% if(message.message) {%>
-    <script>
-        alert("<%= message.message %>")
-    </script>
-<% } %>
+                <!-- Core plugin JavaScript-->
+                <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+                <!-- Custom scripts for all pages-->
+                <script src="/js/sb-admin-2.min.js"></script>
+
+                <script
+                    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/1.1.2/js/bootstrap-multiselect.min.js"
+                    integrity="sha512-lxQ4VnKKW7foGFV6L9zlSe+6QppP9B2t+tMMaV4s4iqAv4iHIyXED7O+fke1VeLNaRdoVkVt8Hw/jmZ+XocsXQ=="
+                    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+                <!-- Page level plugins -->
+                <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+                <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+                <script>
+                    $(document).ready(function () {
+                        $('#dataTable').DataTable(); 
+                        <!--$('#time').multiselect();-- >
+
+
+                        function isWeekend(date) {
+                            date = new Date(date);
+                            return date.getDay() === 6 || date.getDay() === 0;
+                        }
+
+                        let tmpTime = $('#time option').map((index, option) => option.value)
+                        tmpTime = Array.from(tmpTime)
+                        delete tmpTime[0];
+
+
+                        $("#date").on("change", () => {
+                            $('#pp').text("")
+                            tC = $('#court').val()
+
+                            if (tC != null) {
+                                $('#time').children().remove().end().append(
+                                    '<option value="" selected disabled>Time Available</option>');
+
+                                tmpTime.forEach(function (time) {
+                                    $('#time').append('<option value="' + time + '">' + time +
+                                        '</option>')
+                                })
+
+                                $.ajax({
+                                    url: "/api/customer/getAvailableTime/" + $('#date').val() +
+                                        "/" + $('#court').val(),
+                                    type: "GET",
+                                    success: function (data) {
+                                        if (data.length > 0) {
+                                            data.forEach(function (time) {
+                                                $('#time option[value="' + time
+                                                    .bookTime + '"]').remove();
+                                            })
+                                        }
+                                    }
+                                })
+                            }
+
+                        })
+
+                        $("#court").on("change", () => {
+                            $('#pp').text("")
+                            tD = $('#date').val()
+
+                            if (tD != null) {
+                                $('#time').children().remove().end().append(
+                                    '<option value="" selected disabled>Time Available</option>');
+
+                                tmpTime.forEach(function (time) {
+                                    $('#time').append('<option value="' + time + '">' + time +
+                                        '</option>')
+                                })
+
+                                $.ajax({
+                                    url: "/api/customer/getAvailableTime/" + $('#date').val() +
+                                        "/" + $('#court').val(),
+                                    type: "GET",
+                                    success: function (data) {
+                                        if (data.length > 0) {
+                                            data.forEach(function (time) {
+                                                $('#time option[value="' + time
+                                                    .bookTime + '"]').remove();
+                                            })
+                                        }
+                                    }
+                                })
+                            }
+
+                        })
+
+                        $('#time').on("change", function () {
+                            if (isWeekend($('#date').val())) {
+                                if ($('#time').val() != "") {
+                                    $('#pp').text('RM ' + < %= cp[0].price % > )
+                                    $('#price').val( < %= cp[0].price % > )
+                                }
+                            } else {
+                                if ($('#time').val() != "") {
+                                    $('#pp').text('RM ' + < %= cp[1].price % > )
+                                    $('#price').val( < %= cp[1].price % > )
+                                }
+                            }
+                        })
+                    })
+                </script>
+                <script>
+                    $(document).ready(function () {
+                        $('#dataTable').DataTable();
+
+                        $("#accordionSidebar a").each(function (index, element) {
+                            if ($(element).attr('href') == window.location.pathname) {
+                                if ($(element).hasClass('collapse-item') == true) {
+                                    $(element).parent().parent().parent().addClass("active");
+                                    $(element).parent().parent().addClass("show");
+                                    $(element).addClass("active");
+                                } else {
+                                    $(element).parent().addClass("active");
+                                }
+                            }
+                        });
+                    })
+                </script>
+                <% if(message.message) {%>
+                <script>
+                    alert("<%= message.message %>")
+                </script>
+                <% } %>
 </body>
 
 </html>

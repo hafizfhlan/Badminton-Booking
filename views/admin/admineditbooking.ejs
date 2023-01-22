@@ -38,7 +38,7 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admindashboard">
-                
+
                 <div class="sidebar-brand-text mx-3">Booking Court System</div>
             </a>
 
@@ -74,7 +74,7 @@
                     <i class="fas fa-fw fa-table"></i>
                     <span>History Booking</span></a>
             </li>
-            
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -84,7 +84,7 @@
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
-           
+
 
         </ul>
         <!-- End of Sidebar -->
@@ -103,117 +103,146 @@
                     <span>Admin Dashboard</span>
                     <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - User Information -->
-                            <button class="w3-button w3-hover-light-grey"><a href="/logout">Log out</a></button>
+                        <button class="w3-button w3-hover-light-grey"><a href="/logout">Log out</a></button>
                     </ul>
                 </nav>
                 <!-- End of Topbar -->
 
-    
-                <!-- Content Row -->
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
 
-            <!-- Page Heading -->
-            <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    
-    
-            </div>
-    
-            <!-- Content Row -->
-            <div class="row">
-    
-    
-                <div class="card shadow mb-4" style="width: 40%; margin:auto; display:block;">
-    
+                <!-- Content Row -->
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+
+
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+
+
+                        <div class="card shadow mb-4" style="width: 40%; margin:auto; display:block;">
+
                             <div class="card-header py-3" style="text-align:center;">
                                 <h3>Modified Booking Report</h3>
                             </div>
                             <div class="card-body">
 
-                                <form action="/api/admin/updbook/<%= id %>?_method=PUT" method="POST"> 
- 
+                                <form action="/api/admin/updbook/<%= id %>?_method=PUT" method="POST">
+
 
                                     <label class="labelInput" for="Date"><b>Date</b></label><br>
                                     <% var d = data.bookDate
                                     var dM = (d.getMonth()+1)
                                     d = d.getFullYear() + '-' + dM.toString().padStart(2, '0') + '-'  + d.getDate().toString();
                                     %>
-                                    <input class="inputBox" type="date" name="date" value="<%= d %>" style="form-control">
+                                    <input class="inputBox" type="date" name="date" value="<%= d %>"
+                                        style="form-control" required>
 
 
                                     <label class="labelInput" for="selectcourt"><b>Court</b></label><br>
-                                    <select class="inputBox" name="court" value="" style="form-control">
-                                        <option value="<%= data.court['_id'] %>" selected disabled><%= data.court['name']  %></option>
+                                    <select class="inputBox" name="court" value="" style="form-control" required>
+                                        <option value="<%= data.court['_id'] %>" selected disabled>
+                                            <%= data.court['name']  %></option>
                                         <%
                                         for(var i=0;i<dataCourt.length;i++) {
                                         %>
-                                            <option value="<%= dataCourt[i]._id %>"><%= dataCourt[i].name %></option>
+                                        <option value="<%= dataCourt[i]._id %>"><%= dataCourt[i].name %></option>
                                         <%
                                         }
                                         %>
                                     </select><br><br>
 
                                     <label class="labelInput" for="Date"><b>Time</b></label><br>
-                                    <select class="form-control" name="time" style="form-control">
-                                        <option value="<%= data.bookTime %>" selected disabled><%= data.bookTime %></option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-            
+                                    <select class="form-control" name="time" style="form-control" required>
+                                        <option value="<%= data.bookTime %>" selected disabled><%= data.bookTime %>
+                                        </option>
+                                        <option value="09:01 - 10:00">09:01 - 10:00</option>
+                                        <option value="10:01 - 11:00">10:01 - 11:00</option>
+                                        <option value="11:01 - 12:00">11:01 - 12:00</option>
+                                        <option value="12:01 - 13:00">12:01 - 13:00</option>
+                                        <option value="13:01 - 14:00">13:01 - 14:00</option>
+                                        <option value="14:01 - 15:00">14:01 - 15:00</option>
+                                        <option value="15:01 - 16:00">15:01 - 16:00</option>
+                                        <option value="16:01 - 17:00">16:01 - 17:00</option>
+                                        <option value="17:01 - 18:00">17:01 - 18:00</option>
+                                        <option value="18:01 - 19:00">18:01 - 19:00</option>
+                                        <option value="19:01 - 20:00">19:01 - 20:00</option>
+                                        <option value="20:01 - 21:00">20:01 - 21:00</option>
+                                        <option value="21:01 - 22:00">21:01 - 22:00</option>
+                                        <option value="22:01 - 23:00">22:01 - 23:00</option>
+                                        <option value="23:01 - 00:00">23:01 - 00:00</option>
+
                                     </select><br>
 
                                     <input type="hidden" name="_method" value="PUT">
-                                    <input type="submit" id="aa" class="btn btn-success btn-icon-split" onclick="return confirm('Confirm the changes?')" style="margin:auto; display:block; width:100%;"></input>
-                                    
+                                    <input type="submit" id="aa" class="btn btn-success btn-icon-split"
+                                        onclick="return confirm('Confirm the changes?')"
+                                        style="margin:auto; display:block; width:100%;"></input>
+
                                 </form>
                                 <!--
                                 <form action="deleteFiles.php" method="POST">
                                     <input type="hidden" name="delete" value="">
                                     <button class="btn btn-danger btn-circle" onclick="return confirm('Are you sure you want to delete this File?')" type="submit" style="cursor: pointer; margin:auto;display:block;"><i class="fa fa-trash"></i></button>
                                 </form>-->
-                        
-                        
-                    
-                        
+
+
+
+
                             </div>
+                        </div>
+                    </div>
+                    <!-- End of Main Content -->
+
+
+
                 </div>
+                <!-- End of Content Wrapper -->
+
             </div>
-            <!-- End of Main Content -->
-
-            
-
-        </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="/js/sb-admin-2.min.js"></script>
+            <!-- End of Page Wrapper -->
 
 
-    <!-- Page level plugins -->
-<script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<script>
-$(document).ready(function() {
-   $('#dataTable').DataTable();
-})
-</script>
-    <% if(message.message) {%>
-        <script>
-            alert("<%= message.message %>")
-        </script>
-    <% } %>
+
+            <!-- Bootstrap core JavaScript-->
+            <script src="/vendor/jquery/jquery.min.js"></script>
+            <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+            <!-- Core plugin JavaScript-->
+            <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+            <!-- Custom scripts for all pages-->
+            <script src="/js/sb-admin-2.min.js"></script>
+
+
+            <!-- Page level plugins -->
+            <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+            <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $('#dataTable').DataTable();
+
+                    $("#accordionSidebar a").each(function (index, element) {
+                        if ($(element).attr('href') == window.location.pathname) {
+                            if ($(element).hasClass('collapse-item') == true) {
+                                $(element).parent().parent().parent().addClass("active");
+                                $(element).parent().parent().addClass("show");
+                                $(element).addClass("active");
+                            } else {
+                                $(element).parent().addClass("active");
+                            }
+                        }
+                    });
+                })
+            </script>
+            <% if(message.message) {%>
+            <script>
+                alert("<%= message.message %>")
+            </script>
+            <% } %>
 </body>
 
 </html>

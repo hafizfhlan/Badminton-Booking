@@ -30,15 +30,15 @@
 
 <body id="page-top">
 
-     <!-- Page Wrapper -->
-     <div id="wrapper">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-warning sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admindashboard">
-                
+
                 <div class="sidebar-brand-text mx-3">Booking Court System</div>
             </a>
 
@@ -74,7 +74,7 @@
                     <i class="fas fa-fw fa-table"></i>
                     <span>History Booking</span></a>
             </li>
-            
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -84,7 +84,7 @@
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
-           
+
 
         </ul>
         <!-- End of Sidebar -->
@@ -103,12 +103,12 @@
                     <span>Admin Dashboard</span>
                     <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - User Information -->
-                            <button class="w3-button w3-hover-light-grey"><a href="/logout">Log out</a></button>
+                        <button class="w3-button w3-hover-light-grey"><a href="/logout">Log out</a></button>
                     </ul>
                 </nav>
                 <!-- End of Topbar -->
 
-    
+
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
@@ -119,7 +119,8 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="text-align:center ;">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"
+                                    style="text-align:center ;">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -129,10 +130,10 @@
                                             <th>Time</th>
                                             <th>Edit Booking</th>
                                             <th>Delete Booking</th>
-                                            
+
                                         </tr>
                                     </thead>
-                                    
+
                                     <tbody>
                                         <tr>
                                             <td>1</td>
@@ -140,18 +141,21 @@
                                             <td>15/3/2022</td>
                                             <td>3</td>
                                             <td>3</td>
-                                              <!--  <form action="editbooking.html" method="POST">
+                                            <!--  <form action="editbooking.html" method="POST">
                                                     <input type="hidden" name="" id="" value="">
                                                     <td>
                                                       <button style="margin:auto; display:block;" class="btn btn-info btn-circle" type="" style="cursor: pointer;"><i class="fa fa-edit"></i></button>
                                                     </td>
                                                   </form>-->
                                             <td>
-                                                <a class="btn btn-info btn-circle" href="/admineditbooking" ><i class="fa fa-edit"></i></a>
+                                                <a class="btn btn-info btn-circle" href="/admineditbooking"><i
+                                                        class="fa fa-edit"></i></a>
                                             </td>
                                             <td>
-                                                <a class="btn btn-danger btn-circle" href="/admindeletebooking"  style="cursor: pointer; margin:auto;"><i class="fa fa-trash"></i></a>
-                                           </td>
+                                                <a class="btn btn-danger btn-circle" href="/admindeletebooking"
+                                                    style="cursor: pointer; margin:auto;"><i
+                                                        class="fa fa-trash"></i></a>
+                                            </td>
                                         </tr>
 
                                         <tr>
@@ -160,21 +164,24 @@
                                             <td>17/3/2022</td>
                                             <td>2</td>
                                             <td>1</td>
-                                              <!--  <form action="editbooking.html" method="POST">
+                                            <!--  <form action="editbooking.html" method="POST">
                                                     <input type="hidden" name="" id="" value="">
                                                     <td>
                                                       <button style="margin:auto; display:block;" class="btn btn-info btn-circle" type="" style="cursor: pointer;"><i class="fa fa-edit"></i></button>
                                                     </td>
                                                   </form>-->
                                             <td>
-                                                <a class="btn btn-info btn-circle" href="/admineditbooking" ><i class="fa fa-edit"></i></a>
+                                                <a class="btn btn-info btn-circle" href="/admineditbooking"><i
+                                                        class="fa fa-edit"></i></a>
                                             </td>
                                             <td>
-                                                <a class="btn btn-danger btn-circle" href="/admindeletebooking"  style="cursor: pointer; margin:auto;"><i class="fa fa-trash"></i></a>
-                                           </td>
+                                                <a class="btn btn-danger btn-circle" href="/admindeletebooking"
+                                                    style="cursor: pointer; margin:auto;"><i
+                                                        class="fa fa-trash"></i></a>
+                                            </td>
                                         </tr>
-                                        
-                                        
+
+
                                     </tbody>
                                 </table>
                             </div>
@@ -187,7 +194,7 @@
             </div>
             <!-- End of Main Content -->
 
-            
+
 
         </div>
         <!-- End of Content Wrapper -->
@@ -200,7 +207,7 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-   
+
     <!-- Bootstrap core JavaScript-->
     <script src="/vendor/jquery/jquery.min.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -213,13 +220,25 @@
 
 
     <!-- Page level plugins -->
-<script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<script>
-$(document).ready(function() {
-   $('#dataTable').DataTable();
-})
-</script>
+    <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+
+            $("#accordionSidebar a").each(function (index, element) {
+                if ($(element).attr('href') == window.location.pathname) {
+                    if ($(element).hasClass('collapse-item') == true) {
+                        $(element).parent().parent().parent().addClass("active");
+                        $(element).parent().parent().addClass("show");
+                        $(element).addClass("active");
+                    } else {
+                        $(element).parent().addClass("active");
+                    }
+                }
+            });
+        })
+    </script>
 
 </body>
 

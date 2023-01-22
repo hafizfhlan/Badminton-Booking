@@ -25,8 +25,12 @@ let {
 } = require("passport");
 
 var Book = require("../../models/book_info");
-var nodemailer = require('nodemailer')
+var nodemailer = require('nodemailer');
+const {
+	courtPrice
+} = require("../../models/court_price");
 
+/* Creating a transport object that will be used to send the email. */
 var transport = nodemailer.createTransport({
 	host: "smtp.mailtrap.io",
 	port: 2525,
@@ -37,8 +41,7 @@ var transport = nodemailer.createTransport({
 });
 
 
-//TODO:: add in error and info
-
+/* Creating a route for the register page. */
 router.post("/register", async function (req, res, next) {
 	if (
 		!req.body.username ||
@@ -76,6 +79,7 @@ router.post("/register", async function (req, res, next) {
 	}
 });
 
+/* Creating a route for the login page. */
 router.post("/login", function (req, res, next) {
 	CustomerInfo.findOne({
 		email: req.body.email
@@ -88,7 +92,7 @@ router.post("/login", function (req, res, next) {
 					if (doMatch) {
 						req.session.user = data.id;
 						session = req.session.email;
-						console.log(req.session.user)
+						// console.log(req.session.user)
 						res.render("userdashboard");
 					} else {
 						req.flash("message", "Wrong Password")
@@ -105,6 +109,7 @@ router.post("/login", function (req, res, next) {
 	});
 });
 
+/* The above code is updating the customer's profile. */
 router.put("/updprofile", (req, res) => {
 
 	email = req.body.email;
@@ -129,6 +134,8 @@ router.put("/updprofile", (req, res) => {
 	})
 })
 
+/* The above code is checking if the email and password is correct. If it is correct, it will render
+the userdashboard page. */
 router.post("/userdashboard", function (req, res, next) {
 	CustomerInfo.findOne({
 		email: req.body.email
@@ -158,6 +165,7 @@ router.post("/userdashboard", function (req, res, next) {
 });
 
 
+/* Updating the user's profile. */
 router.post("/editprofile", function (req, res, next) {
 	const update = {
 		name: req.body.name,
@@ -181,13 +189,12 @@ router.post("/editprofile", function (req, res, next) {
 });
 
 
+/* Finding the court information from the database. */
 router.post("/book", async function (req, res, next) {
-
 	var courtData = await courtInfo.findOne({
 		_id: req.body.court
 	})
 
-	console.log(courtData)
 	CustomerInfo.findOne({
 		_id: req.body.id
 	}, function (err, data) {
@@ -206,19 +213,23 @@ router.post("/book", async function (req, res, next) {
 						bookDate: req.body.date,
 						bookTime: req.body.time,
 						court: req.body.court,
+						total: req.body.price
 					});
 
+					/* The above code is saving the data to the database. */
 					book1.save((err, result) => {
 						if (!err) {
+							req.flash("message", "Booking has been made!")
 							res.redirect('/customer/book')
 						} else {
-							console.log(err)
+							// console.log(err)
 							res.json({
 								status: 'Fail'
 							})
 						}
 					})
 
+					/* Sending an email to the user who booked the court. */
 					message = {
 						from: "admin@gmail.com",
 						to: data.email,
@@ -233,8 +244,9 @@ router.post("/book", async function (req, res, next) {
 								  Hi <strong>${data.name}</strong>,
 								  <br>
 								  This is the booking for your booking courts.
-								  <br>
-								  <br>
+								  <p>
+								  Below is your booking details:
+								  <p>
 								  Your Court:
 								  ${courtData.name}
 								  <br>
@@ -243,6 +255,9 @@ router.post("/book", async function (req, res, next) {
 								  <br>
 								  Time Booking:
 								  ${req.body.time}
+								  <br>
+								  Total Price:
+								  ${'RM ' + req.body.price}
 								</div>
 					  
 							   
@@ -250,10 +265,10 @@ router.post("/book", async function (req, res, next) {
 								<div class="payment-details">
 								  <div class="row">
 									<div class="col-sm-6">
-									  <span>Client</span>
+									  <span>Customer</span>
 									  <strong>
 									  <br>
-										${data.name}
+										${data.name + ','}
 									  </strong>
 									  <p>
 
@@ -495,5 +510,52 @@ router.post("/book", async function (req, res, next) {
 		}
 	});
 });
+
+
+// router.get('/getAvailableTime/:date', (req,res) => {
+// 	if(req.params.date) {
+// 		Book.bookInfo.find({bookDate: req.params.date}, {bookTime:1, _id: 0}).then(data => {
+// 			res.json(data)
+// 		})
+// 	} else {
+// 		res.status(400).json("Not Found")
+// 	}
+
+// })
+
+/* A route that is being defined. */
+router.get("/canbooking/:id", (req, res) => {
+	bookInfo.findByIdAndRemove(req.params.id, function (err, result) {
+		if (!err) {
+			req.flash('message', 'Booking removed successfully!');
+			res.redirect('/customer/cancelbooking');
+		} else {
+			req.flash('message', 'Failed to removed the booking!');
+			res.redirect('/customer/cancelbooking');
+		}
+	})
+})
+
+/* A route that is being called from the front end. */
+router.get('/getAvailableTime/:date/:court', (req, res) => {
+	if ((req.params.date != "" && req.params.court != "") || (req.params.date != "null" && req.params.court != "null")) {
+		Book.bookInfo.find({
+			bookDate: req.params.date,
+			court: req.params.court
+		}, {
+			bookTime: 1,
+			_id: 0
+		}, (err, data) => {
+			if (err) {
+				res.status(400).json("Not Found")
+			} else {
+				res.json(data)
+			}
+		})
+	} else {
+		res.status(400).json("Not Found")
+	}
+
+})
 
 module.exports = router;

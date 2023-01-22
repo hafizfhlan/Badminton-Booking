@@ -1,40 +1,54 @@
 var express = require("express");
 var bcrypt = require("bcryptjs");
 var flash = require("connect-flash");
-let { session } = require("passport");
-const { CustomerInfo } = require("../../models/customer_info");
-var {bookInfo} = require('../../models/book_info')
+let {
+	session
+} = require("passport");
+const {
+	CustomerInfo
+} = require("../../models/customer_info");
+var {
+	bookInfo
+} = require('../../models/book_info')
+const {
+	courtPrice
+} = require("../../models/court_price");
+const {
+	courtInfo
+} = require("../../models/court");
 
 const court = require("../../models/court")
 var router = express.Router();
 var nodemailer = require('nodemailer')
 
+/* Creating a transport object for nodemailer. */
 var transport = nodemailer.createTransport({
 	host: "smtp.mailtrap.io",
 	port: 2525,
 	auth: {
-	  user: "375ca65ef99fb0",
-	  pass: "e0db19d4564fbd"
+		user: "375ca65ef99fb0",
+		pass: "e0db19d4564fbd"
 	}
-  });
+});
 
- 
 
-router.get("/login", function(req, res){
-    res.render("login");
+
+router.get("/login", function (req, res) {
+	res.render("login");
 })
 
 
 
-router.get("/dashboard", function(req, res){
-    res.render("userdashboard");
+router.get("/dashboard", function (req, res) {
+	res.render("userdashboard");
 })
 
 
+/* This is a route handler for the userprofile page. */
 router.get("/userprofile", function (req, res, next) {
-	console.log()
-	console.log(req.session.user)
-	CustomerInfo.findOne({ _id: req.session.user }, function (err, data) {
+	CustomerInfo.findOne({
+		_id: req.session.user
+	}, function (err, data) {
 		if (data) {
 			res.render("userprofile", {
 				name: data.name,
@@ -48,26 +62,37 @@ router.get("/userprofile", function (req, res, next) {
 	});
 });
 
-router.get("/editprofile", function(req, res){
-	CustomerInfo.findOne({ id: req.session.user }, function (err, data) {
+/* This is a route handler for the editprofile page. */
+router.get("/editprofile", function (req, res) {
+	CustomerInfo.findOne({
+		_id: req.session.user
+	}, function (err, data) {
 		if (data) {
 			res.render("editprofile", {
-				name: data.name,   
-				email: data.email, 
+				name: data.name,
+				email: data.email,
 				phoneNo: data.phoneNo,
 				userID: data.id
 			});
 		} else {
 			res.render("userdashboard");
 		}
-})
+	})
 })
 
-router.get("/book", function(req, res){
-	court.courtInfo.find({status:'available'}, (err, data) => {
-		res.render("bookingcourt", {id: req.session.user, data: data});
+/* Finding the courtPrice collection and populating the user and court fields. */
+router.get("/book", async function (req, res) {
+	var cp = await courtPrice.find();
+	court.courtInfo.find({
+		status: 'available'
+	}, (err, data) => {
+		res.render("bookingcourt", {
+			id: req.session.user,
+			data: data,
+			cp: cp
+		});
 	})
-    
+
 })
 
 // router.get("/history", function(req, res){
@@ -79,18 +104,43 @@ router.get("/book", function(req, res){
 //         }
 //     })  
 
-    
+
 // })
 
-router.get("/history",(req, res,)=>{
-	bookInfo.find({user: req.session.user}).populate({
-		
+/* Finding the bookInfo collection and populating the user and court fields. */
+router.get("/cancelbooking/", function (req, res) {
+	bookInfo.find({
+		user: req.session.user
+	}).populate({
 		path: "user",
-		select: {'password':0}
+		select: {
+			'password': 0
+		}
 	}).populate({
 		path: "court",
 	}).exec().then((data) => {
-		res.render("history.ejs",{data:data})
+		res.render("cancelbooking.ejs", {
+			data: data
+		})
+	})
+})
+
+/* Finding the bookInfo collection and populating the user and court fields. */
+router.get("/history", (req, res, ) => {
+	bookInfo.find({
+		user: req.session.user
+	}).populate({
+
+		path: "user",
+		select: {
+			'password': 0
+		}
+	}).populate({
+		path: "court",
+	}).exec().then((data) => {
+		res.render("history.ejs", {
+			data: data
+		})
 	})
 	// console.log(req.session);
 
@@ -103,8 +153,8 @@ router.get("/history",(req, res,)=>{
 	// 	console.log('Failed to retrieve the booking List: ' + err);
 	// }
 	// });
-	
-	
+
+
 
 });
 

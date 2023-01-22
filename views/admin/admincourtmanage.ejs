@@ -119,8 +119,10 @@
                             <h6 class="m-0 font-weight-bold text-warning">Manage Court</h6>
 
                         </div>
-                        <a type="button" class="w3-button w3-hover-green" style="float: right;"
-                            href="/admin/adminaddcourt">Add Court</a>
+                        <!-- <a type="button" class="w3-button w3-hover-green" style="float: right;"
+                            href="/admin/adminaddcourt">Add Court</a> -->
+                        <a href="/admin/adminaddcourt" class="btn btn-warning ">Add Court</a>
+
 
                         <div class="card-body">
                             <div class="table-responsive">
@@ -129,9 +131,9 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Court name</th>
+                                            <th>Court Name</th>
                                             <th>Status</th>
-                                            <th>Edit court</th>
+                                            <th>Edit Court</th>
                                             <th>Delete Court</th>
 
 
@@ -150,8 +152,11 @@
                                                         class="fa fa-edit"></i></a>
                                             </td>
                                             <td>
-                                                <a class="btn btn-sm btn-danger btn-circle" href="/api/admin/delcourt/<%= data[i]._id%>" onclick="return confirm('Sure wants to delete the court?')" ><i class="fa fa-trash"></i></a>
-                                           </td>
+                                                <a class="btn btn-sm btn-danger btn-circle"
+                                                    href="/api/admin/delcourt/<%= data[i]._id%>"
+                                                    onclick="return confirm('Sure wants to delete the court?')"><i
+                                                        class="fa fa-trash"></i></a>
+                                            </td>
 
                                         </tr>
                                         <% } %>
@@ -196,29 +201,29 @@
 
 
     <!-- Page level plugins -->
-<script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<script>
-$(document).ready(function() {
-   $('#dataTable').DataTable();
+    <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
 
-   $("#accordionSidebar a").each(function(index, element) {
-    if ($(element).attr('href') == window.location.pathname) {
-        if ($(element).hasClass('collapse-item') == true) {
-            $(element).parent().parent().parent().addClass("active");
-            $(element).parent().parent().addClass("show");
-            $(element).addClass("active");
-        } else {
-            $(element).parent().addClass("active");
-        }
-    }
-});
-})
-</script>
+            $("#accordionSidebar a").each(function (index, element) {
+                if ($(element).attr('href') == window.location.pathname) {
+                    if ($(element).hasClass('collapse-item') == true) {
+                        $(element).parent().parent().parent().addClass("active");
+                        $(element).parent().parent().addClass("show");
+                        $(element).addClass("active");
+                    } else {
+                        $(element).parent().addClass("active");
+                    }
+                }
+            });
+        })
+    </script>
     <% if(message.message) {%>
-        <script>
-            alert("<%= message.message %>")
-        </script>
+    <script>
+        alert("<%= message.message %>")
+    </script>
     <% } %>
 </body>
 

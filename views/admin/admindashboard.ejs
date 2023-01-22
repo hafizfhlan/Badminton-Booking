@@ -22,7 +22,7 @@
     <!-- Custom styles for this template-->
     <link href="/asset/css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    
+
 </head>
 
 <body id="page-top">
@@ -35,7 +35,7 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin/admindashboard">
-                
+
                 <div class="sidebar-brand-text mx-3">Booking Court System</div>
             </a>
 
@@ -71,7 +71,7 @@
                     <i class="fas fa-fw fa-table"></i>
                     <span>History Booking</span></a>
             </li>
-            
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -81,7 +81,7 @@
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
-           
+
 
         </ul>
         <!-- End of Sidebar -->
@@ -98,13 +98,13 @@
                     <span>Admin Dashboard</span>
                     <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - User Information -->
-                            <button class="w3-button w3-hover-light-grey"><a href="/logout">Log out</a></button>
+                        <button class="w3-button w3-hover-light-grey"><a href="/logout">Log out</a></button>
                     </ul>
                 </nav>
                 <!-- End of Topbar -->
 
-                   <!--Dashboard --> 
-                  <!-- Begin Page Content -->
+                <!--Dashboard -->
+                <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     <!-- Content Row -->
@@ -195,8 +195,8 @@
                     </div>
 
                     <!-- Content Row -->
-                        
-                                
+
+
                     <!-- Content Row -->
                     <div class="row">
 
@@ -242,11 +242,11 @@
                                 </div>
                             </div>
 
-                            
+
 
                         </div>
 
-                        
+
                     </div>
 
                 </div>
@@ -269,19 +269,19 @@
 
 
 
-                
 
-            </div>
-            <!-- End of Main Content -->
 
-            
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Main Content -->
+
+
+    </div>
+    <!-- End of Content Wrapper -->
 
     </div>
     <!-- End of Page Wrapper -->
-    
-    
+
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="/vendor/jquery/jquery.min.js"></script>
@@ -295,13 +295,25 @@
 
 
     <!-- Page level plugins -->
-<script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<script>
-$(document).ready(function() {
-   $('#dataTable').DataTable();
-})
-</script>
+    <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+
+            $("#accordionSidebar a").each(function (index, element) {
+                if ($(element).attr('href') == window.location.pathname) {
+                    if ($(element).hasClass('collapse-item') == true) {
+                        $(element).parent().parent().parent().addClass("active");
+                        $(element).parent().parent().addClass("show");
+                        $(element).addClass("active");
+                    } else {
+                        $(element).parent().addClass("active");
+                    }
+                }
+            });
+        })
+    </script>
 
 </body>
 

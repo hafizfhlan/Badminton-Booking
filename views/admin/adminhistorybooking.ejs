@@ -11,7 +11,7 @@
 
     <title>History Booking Court</title>
     <link href="/img/favicon.png" rel="icon">
-  <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
 
 
     <!-- Custom fonts for this template -->
@@ -20,7 +20,7 @@
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-        
+
     <!-- Custom styles for this template -->
     <link href="/asset/css/sb-admin-2.min.css" rel="stylesheet">
 
@@ -32,15 +32,15 @@
 
 <body id="page-top">
 
-     <!-- Page Wrapper -->
-     <div id="wrapper">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-warning sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin/admindashboard">
-                
+
                 <div class="sidebar-brand-text mx-3">Booking Court System</div>
             </a>
 
@@ -76,7 +76,7 @@
                     <i class="fas fa-fw fa-table"></i>
                     <span>History Booking</span></a>
             </li>
-           
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -86,7 +86,7 @@
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
-           
+
 
         </ul>
         <!-- End of Sidebar -->
@@ -105,12 +105,12 @@
                     <span>Admin Dashboard</span>
                     <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - User Information -->
-                            <button class="w3-button w3-hover-light-grey"><a href="/logout">Log out</a></button>
+                        <button class="w3-button w3-hover-light-grey"><a href="/logout">Log out</a></button>
                     </ul>
                 </nav>
                 <!-- End of Topbar -->
 
-    
+
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
@@ -119,9 +119,14 @@
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-warning">History Booking Court</h6>
                         </div>
+
+                        <a href="/invoice" class="btn btn-warning ">Generate Report</a>
+
+
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="text-align:center ;">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"
+                                    style="text-align:center ;">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -129,38 +134,48 @@
                                             <th>Date</th>
                                             <th>Court Name</th>
                                             <th>Time</th>
+                                            <th>Total Price (RM)</th>
                                             <th>Edit Booking</th>
                                             <th>Delete Booking</th>
-                                            
+
+
+
                                         </tr>
                                     </thead>
-                                    
+
                                     <tbody>
                                         <% for(var i = 0; i < data.length; i++) { %>
-                                            <tr>
-                                              <td><%= i + 1 %></td>
-                                              <td><%= data[i].user['email'] %></td>
-                                              <%
+                                        <tr>
+                                            <td><%= i + 1 %></td>
+                                            <td><%= data[i].user['email'] %></td>
+                                            <%
                                               var d = data[i].bookDate
                                               var dM = (d.getMonth()+1)
                                               d = d.getDate().toString() + '-' + dM.toString().padStart(2, '0') + '-'  + d.getFullYear();
                                               %>
-                                              <td><%= d %></td> 
-                                              <td><%= data[i].court['name'] %></td>
-                                              <td><%= data[i].bookTime %></td>
-                          
-                                             
-                                              <td>
-                                                <a class="btn btn-sm btn-info btn-circle" href="/admin/admineditbooking/<%= data[i]._id%>" ><i class="fa fa-edit"></i></a>
+                                            <td><%= d %></td>
+                                            <td><%= data[i].court['name'] %></td>
+                                            <td><%= data[i].bookTime %></td>
+                                            <td>RM <%= data[i].total %></td>
+
+
+                                            <td>
+                                                <a class="btn btn-sm btn-info btn-circle"
+                                                    href="/admin/admineditbooking/<%= data[i]._id%>"><i
+                                                        class="fa fa-edit"></i></a>
                                             </td>
                                             <td>
-                                                <a class="btn btn-sm btn-danger btn-circle" href="/api/admin/delbook/<%= data[i]._id%>" onclick="return confirm('Sure wants to delete the booking?')" ><i class="fa fa-trash"></i></a>
-                                           </td>
+                                                <a class="btn btn-sm btn-danger btn-circle"
+                                                    href="/api/admin/delbook/<%= data[i]._id%>"
+                                                    onclick="return confirm('Sure wants to delete the booking?')"><i
+                                                        class="fa fa-trash"></i></a>
+                                            </td>
 
-                                          </tr>
-                                          <% } %>
-                                        
-                                        
+
+
+                                        </tr>
+                                        <% } %>
+
                                     </tbody>
                                 </table>
                             </div>
@@ -173,7 +188,7 @@
             </div>
             <!-- End of Main Content -->
 
-            
+
 
         </div>
         <!-- End of Content Wrapper -->
@@ -186,7 +201,7 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-   
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="/vendor/jquery/jquery.min.js"></script>
@@ -200,30 +215,29 @@
 
 
     <!-- Page level plugins -->
-<script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<script>
-$(document).ready(function() {
-   $('#dataTable').DataTable();
+    <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
 
-   $("#accordionSidebar a").each(function(index, element) {
-    console.log(index)
-    if ($(element).attr('href') == window.location.pathname) {
-        if ($(element).hasClass('collapse-item') == true) {
-            $(element).parent().parent().parent().addClass("active");
-            $(element).parent().parent().addClass("show");
-            $(element).addClass("active");
-        } else {
-            $(element).parent().addClass("active");
-        }
-    }
-});
-})
-</script>
+            $("#accordionSidebar a").each(function (index, element) {
+                if ($(element).attr('href') == window.location.pathname) {
+                    if ($(element).hasClass('collapse-item') == true) {
+                        $(element).parent().parent().parent().addClass("active");
+                        $(element).parent().parent().addClass("show");
+                        $(element).addClass("active");
+                    } else {
+                        $(element).parent().addClass("active");
+                    }
+                }
+            });
+        })
+    </script>
     <% if(message.message) {%>
-        <script>
-            alert("<%= message.message %>")
-        </script>
+    <script>
+        alert("<%= message.message %>")
+    </script>
     <% } %>
 </body>
 

@@ -350,7 +350,11 @@
 
   <!-- Template Main JS File -->
   <script src="/js/main.js"></script>
-
+  <% if(message.message) {%>
+    <script>
+        alert("<%= message.message %>")
+    </script>
+<% } %>
 </body>
 
 </html>

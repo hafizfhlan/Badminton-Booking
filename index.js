@@ -16,8 +16,7 @@ var app = express();
 
 /* Connecting to the database. */
 mongoose.connect(
-    params.DATABASECONNECTION,
-    {
+    params.DATABASECONNECTION, {
         useUnifiedTopology: true,
     },
     (err) => {
@@ -50,7 +49,9 @@ app.use(session({
     resave: true,
     saveUninitialized: true,
     store: sessionStore,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 } // 1day
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24
+    } // 1day
 }));
 
 app.use(methodOverride('_method'))

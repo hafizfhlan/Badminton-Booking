@@ -1,7 +1,10 @@
 var mongoose = require("mongoose");
 
+/* Creating a schema for the courtInfo model. */
 var courtInfoSchema = new mongoose.Schema({
-	name: { type: String },
+	name: {
+		type: String
+	},
 	status: {
 		type: String,
 		enum: ['available', 'not available'],
@@ -9,5 +12,8 @@ var courtInfoSchema = new mongoose.Schema({
 	}
 });
 
+/* Creating a model called courtInfo. */
 const courtInfo = mongoose.model("court", courtInfoSchema);
-module.exports = {courtInfo};
+module.exports = {
+	courtInfo
+};

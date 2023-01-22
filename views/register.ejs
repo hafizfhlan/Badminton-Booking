@@ -24,37 +24,36 @@
 
 </head>
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function () {
 
-        $( "#form1" ).submit(function(event) {
+        $("#form1").submit(function (event) {
             event.preventDefault();
             $.ajax({
                 type: 'POST',
                 url: '/',
                 data: $('#form1').serialize(),
                 dataType: "json",
-                success: function(response){
+                success: function (response) {
                     $('#form1')[0].reset();
 
-                    document.getElementById("check").innerHTML=response.Success;
-                         //ADD THIS CODE
-                         setTimeout(function(){
-                             document.getElementById("check").innerHTML="";
-                         },3000);
-                         if (response.Success=="You already registered, you can login now.") {
-                             document.getElementById("aa").click();
-                         };
-                     },
-                     error: function() {
-                     }
-                 })
+                    document.getElementById("check").innerHTML = response.Success;
+                    //ADD THIS CODE
+                    setTimeout(function () {
+                        document.getElementById("check").innerHTML = "";
+                    }, 3000);
+                    if (response.Success == "You already registered, you can login now.") {
+                        document.getElementById("aa").click();
+                    };
+                },
+                error: function () {}
+            })
         });
     });
 </script>
 
 <body class="bg-gradient-warning">
-    
-     <div class="container">
+
+    <div class="container">
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
                 <div class="row">
@@ -67,22 +66,28 @@
 
                             <form class="user" id="form1" method="post" action="/api/customer/register">
                                 <div class="form-group">
-                                    <input type="text" name="username" class="form-control form-control-user" placeholder="Username">
+                                    <input type="text" name="username" class="form-control form-control-user"
+                                        placeholder="Username" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email"name="email" class="form-control form-control-user" placeholder="Email Address">
+                                    <input type="email" name="email" class="form-control form-control-user"
+                                        placeholder="Email Address" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="phoneNo"name="phoneNo" class="form-control form-control-user" placeholder="Phone No">
+                                    <input type="phoneNo" name="phoneNo" class="form-control form-control-user"
+                                        placeholder="Phone No" required>
                                 </div>
                                 <div class="form-group ">
-                                    <input type="password"name="password" class="form-control form-control-user" placeholder="Password">
+                                    <input type="password" name="password" class="form-control form-control-user"
+                                        placeholder="Password" required>
                                 </div>
-                                <div class="form-group ">
-                                    <input type="password"name="passwordConf" class="form-control form-control-user" placeholder="Password Confirmation">
+                                <div class="form-group " required>
+                                    <input type="password" name="passwordConf" class="form-control form-control-user"
+                                        placeholder="Password Confirmation" required>
                                 </div>
                                 <!-- <a href="login.html" class="btn btn-primary btn-user btn-block">Register Account</a> -->
-                                <input type="submit" value="Register" id="aa" class="btn btn-warning btn-user btn-block">
+                                <input type="submit" value="Register" id="aa"
+                                    class="btn btn-warning btn-user btn-block">
                                 <hr>
                             </form>
 
@@ -93,8 +98,8 @@
             </div>
         </div>
 
-    </div> 
-    
+    </div>
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="/vendor/jquery/jquery.min.js"></script>
@@ -108,14 +113,18 @@
 
 
     <!-- Page level plugins -->
-<script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<script>
-$(document).ready(function() {
-   $('#dataTable').DataTable();
-})
-</script>
-
+    <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        })
+    </script>
+    <% if(message.message) {%>
+    <script>
+        alert("<%= message.message %>")
+    </script>
+    <% } %>
 </body>
 
 </html>

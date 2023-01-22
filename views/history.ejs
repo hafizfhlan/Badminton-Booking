@@ -64,6 +64,13 @@
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Booking Court</span></a>
             </li>
+            <!-- Nav Item - Cancel Booking -->
+            <hr class="sidebar-divider">
+            <li class="nav-item">
+                <a class="nav-link" href="/customer/cancelbooking">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Cancel Booking</span></a>
+            </li>
             <hr class="sidebar-divider">
             <!-- Nav Item - Tables -->
             <li class="nav-item">
@@ -116,11 +123,12 @@
                                     style="text-align:center ;">
                                     <thead>
                                         <tr>
-                                            <th>No</th> 
+                                            <th>No</th>
                                             <th>User</th>
                                             <th>Date</th>
                                             <th>Court Name</th>
                                             <th>Time</th>
+                                            <th>Total Price (RM)</th>
                                         </tr>
                                     </thead>
 
@@ -139,7 +147,7 @@
                                             <td><%= d %></td>
                                             <td><%= data[i].court['name'] %></td>
                                             <td><%= data[i].bookTime %></td>
-
+                                            <td>RM <%= data[i].total %></td>
 
                                         </tr>
                                         <% } %>
@@ -152,20 +160,6 @@
                     </div>
 
                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             </div>
             <!-- End of Main Content -->
@@ -191,13 +185,30 @@
 
 
     <!-- Page level plugins -->
-<script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<script>
-$(document).ready(function() {
-   $('#dataTable').DataTable();
-})
-</script>
+    <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+
+            $("#accordionSidebar a").each(function (index, element) {
+                if ($(element).attr('href') == window.location.pathname) {
+                    if ($(element).hasClass('collapse-item') == true) {
+                        $(element).parent().parent().parent().addClass("active");
+                        $(element).parent().parent().addClass("show");
+                        $(element).addClass("active");
+                    } else {
+                        $(element).parent().addClass("active");
+                    }
+                }
+            });
+        })
+    </script>
+    <% if(message.message) {%>
+    <script>
+        alert("<%= message.message %>")
+    </script>
+    <% } %>
 
 </body>
 

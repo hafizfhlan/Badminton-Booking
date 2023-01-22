@@ -38,15 +38,15 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/customer/dashboard">
-                
+
                 <div class="sidebar-brand-text mx-3">Booking Court System</div>
             </a>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-             <!-- Nav Item - Dashboard -->
-             <li class="nav-item">
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
                 <a class="nav-link" href="/customer/dashboard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
@@ -67,6 +67,13 @@
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Booking Court</span></a>
             </li>
+            <!-- Nav Item - Cancel Booking -->
+            <hr class="sidebar-divider">
+            <li class="nav-item">
+                <a class="nav-link" href="/customer/cancelbooking">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Cancel Booking</span></a>
+            </li>
             <hr class="sidebar-divider">
             <!-- Nav Item - Tables -->
             <li class="nav-item">
@@ -74,7 +81,7 @@
                     <i class="fas fa-fw fa-table"></i>
                     <span>History Booking</span></a>
             </li>
-            
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -84,7 +91,7 @@
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
-           
+
 
         </ul>
         <!-- End of Sidebar -->
@@ -101,95 +108,121 @@
                     <span>User Dashboard</span>
                     <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - User Information -->
-                            <button class="w3-button w3-hover-light-grey"><a href="/logout">Log out</a></button>
+                        <button class="w3-button w3-hover-light-grey"><a href="/logout">Log out</a></button>
                     </ul>
                 </nav>
                 <!-- End of Topbar -->
-    
-    <div class="container-fluid">
 
-        <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <div class="container-fluid">
 
-
-        </div>
-
-        <!-- Content Row -->
-        <div class="row">
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
 
 
-            <div class="card shadow mb-4" style="width: 40%; margin:auto; display:block;">
+                    </div>
 
-                        <div class="card-header py-3" style="text-align:center;">
-                            <h3>Edit Booking</h3>
-                        </div>
-                        <div class="card-body" style="text-align: center;">
+                    <!-- Content Row -->
+                    <div class="row">
 
-                            <form  method="post">
-                                <label class="labelInput" for="Date"><b>Today</b></label><br>
-                                <input type=date  id='e' value='a' readonly>
-                                <script>
-                                var a = document.getElementById('e').value = new Date().toISOString().substring(0, 10);
-                                </script><br>
 
-                                <label class="labelInput" for="Date"><b>Date</b></label><br>
-                                <input class="inputBox" type="text" name="date" value="<%= data[0].bookdate %>" style="text-align: center;"readonly /><br>
+                        <div class="card shadow mb-4" style="width: 40%; margin:auto; display:block;">
 
-                                <label class="labelInput" style=" margin-top:10px;" for="Time"><b>Time</b></label><br>
-                                <input class="inputBox" type="text" name="time" value="<%= data[0].booktime %>"style="text-align: center;"readonly /><br>
+                            <div class="card-header py-3" style="text-align:center;">
+                                <h3>Edit Booking</h3>
+                            </div>
+                            <div class="card-body" style="text-align: center;">
 
-                                <label class="labelInput" style=" margin-top:10px;" "><b>Court</b></label><br>
-                                <input class="inputBox" type="text" name="court" value="<%= data[0].court %>" style="text-align: center;"readonly/><br>
-                                
-                            
-                            <!--
+                                <form method="post">
+                                    <label class="labelInput" for="Date"><b>Today</b></label><br>
+                                    <input type=date id='e' value='a' readonly>
+                                    <script>
+                                        var a = document.getElementById('e').value = new Date().toISOString().substring(
+                                            0, 10);
+                                    </script><br>
+
+                                    <label class="labelInput" for="Date"><b>Date</b></label><br>
+                                    <input class="inputBox" type="text" name="date" value="<%= data[0].bookdate %>"
+                                        style="text-align: center;" readonly /><br>
+
+                                    <label class="labelInput" style=" margin-top:10px;"
+                                        for="Time"><b>Time</b></label><br>
+                                    <input class="inputBox" type="text" name="time" value="<%= data[0].booktime %>"
+                                        style="text-align: center;" readonly /><br>
+
+                                    <label class="labelInput" style=" margin-top:10px;"><b>Court</b></label><br>
+                                    <input class="inputBox" type="text" name="court" value="<%= data[0].court %>"
+                                        style="text-align: center;" readonly /><br>
+
+
+                                    <!--
                             <form action="deleteFiles.php" method="POST">
                                 <input type="hidden" name="delete" value="">
                                 <button class="btn btn-danger btn-circle" onclick="return confirm('Are you sure you want to delete this File?')" type="submit" style="cursor: pointer; margin:auto;display:block;"><i class="fa fa-trash"></i></button>
                             </form>-->
-                            <a type="submit" id="aa" class="btn btn-sm btn-danger " href="/delete/<%= data[0]._id%>" onclick="return confirm('Are you sure you want to delete this booking?')" style="margin:auto; display:block; margin-top:30px; width:50%;"><i class="fa fa-trash"></i></a>
-                            
-                        </form>
-                    
-                
-                    
+                                    <a type="submit" id="aa" class="btn btn-sm btn-danger "
+                                        href="/delete/<%= data[0]._id%>"
+                                        onclick="return confirm('Are you sure you want to delete this booking?')"
+                                        style="margin:auto; display:block; margin-top:30px; width:50%;"><i
+                                            class="fa fa-trash"></i></a>
+
+                                </form>
+
+
+
+                            </div>
                         </div>
-            </div>
-        </div>
-                <!-- /.container-fluid -->
+                    </div>
+                    <!-- /.container-fluid -->
+
+                </div>
+                <!-- End of Main Content -->
+
+
 
             </div>
-            <!-- End of Main Content -->
-
-            
+            <!-- End of Content Wrapper -->
 
         </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="/js/sb-admin-2.min.js"></script>
+        <!-- End of Page Wrapper -->
 
 
-    <!-- Page level plugins -->
-<script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<script>
-$(document).ready(function() {
-   $('#dataTable').DataTable();
-})
-</script>
+
+        <!-- Bootstrap core JavaScript-->
+        <script src="/vendor/jquery/jquery.min.js"></script>
+        <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Core plugin JavaScript-->
+        <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+        <!-- Custom scripts for all pages-->
+        <script src="/js/sb-admin-2.min.js"></script>
+
+
+        <!-- Page level plugins -->
+        <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#dataTable').DataTable();
+
+                $("#accordionSidebar a").each(function (index, element) {
+                    if ($(element).attr('href') == window.location.pathname) {
+                        if ($(element).hasClass('collapse-item') == true) {
+                            $(element).parent().parent().parent().addClass("active");
+                            $(element).parent().parent().addClass("show");
+                            $(element).addClass("active");
+                        } else {
+                            $(element).parent().addClass("active");
+                        }
+                    }
+                });
+            })
+        </script>
+        <% if(message.message) {%>
+        <script>
+            alert("<%= message.message %>")
+        </script>
+        <% } %>
 
 </body>
 

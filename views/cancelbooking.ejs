@@ -9,21 +9,18 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>History Booking Court</title>
+    <title>Booking Court System</title>
     <link href="/img/favicon.png" rel="icon">
     <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-    <!-- Custom fonts for this template -->
+    <!-- Custom fonts for this template-->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <!-- Custom styles for this template -->
+    <!-- Custom styles for this template-->
     <link href="/asset/css/sb-admin-2.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this page -->
-    <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 </head>
@@ -37,7 +34,7 @@
         <ul class="navbar-nav bg-gradient-warning sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin/admindashboard">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/customer/dashboard">
 
                 <div class="sidebar-brand-text mx-3">Booking Court System</div>
             </a>
@@ -47,34 +44,40 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="/admin/admindashboard">
+                <a class="nav-link" href="/customer/dashboard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
-
             <li class="nav-item">
-                <a class="nav-link" href="/admin/adminviewuser">
+                <a class="nav-link" href="/customer/userprofile">
                     <i class="fa fa-user"></i>
-                    <span>View User Profile</span></a>
+                    <span>User Profile</span></a>
             </li>
+
             <hr class="sidebar-divider">
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="/admin/admincourtmanage">
+                <a class="nav-link" href="/customer/book">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Manage Court</span></a>
+                    <span>Booking Court</span></a>
+            </li>
+            <!-- Nav Item - Cancel Booking -->
+            <hr class="sidebar-divider">
+            <li class="nav-item">
+                <a class="nav-link" href="/customer/cancelbooking">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Cancel Booking</span></a>
             </li>
             <hr class="sidebar-divider">
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="/admin/adminhistorybooking">
+                <a class="nav-link" href="/customer/history">
                     <i class="fas fa-fw fa-table"></i>
                     <span>History Booking</span></a>
             </li>
-
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -89,8 +92,6 @@
         </ul>
         <!-- End of Sidebar -->
 
-        <!-- End of Sidebar -->
-
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -100,7 +101,7 @@
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                     <!-- Topbar Navbar -->
-                    <span>Admin Dashboard</span>
+                    <span>User Dashboard</span>
                     <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - User Information -->
                         <button class="w3-button w3-hover-light-grey"><a href="/logout">Log out</a></button>
@@ -108,14 +109,13 @@
                 </nav>
                 <!-- End of Topbar -->
 
-
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- DataTales Example -->
+                    <!-- DataTables Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-warning">View All User</h6>
+                            <h6 class="m-0 font-weight-bold text-warning">History Booking Court</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -124,46 +124,66 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Username</th>
-                                            <th>Email</th>
-                                            <!-- <th>Edit</th> -->
-                                            <th>Delete</th>
-
+                                            <th>User</th>
+                                            <th>Date</th>
+                                            <th>Court Name</th>
+                                            <th>Time</th>
+                                            <th>Total Price (RM)</th>
+                                            <th>Cancel Booking</th>
                                         </tr>
+                                    </thead>
+
                                     <tbody>
                                         <% for(var i = 0; i < data.length; i++) { %>
                                         <tr>
                                             <td><%= i + 1 %></td>
-                                            <td><%= data[i].name %></td>
-                                            <td><%= data[i].email %></td>
-                                            <!-- <td>
-                                                <a class="btn btn-info btn-circle"
-                                                    href="/admin/adminviewuser/<%= data[i]._id%>"><i
-                                                        class="fa fa-edit"></i></a>
-                                            </td> -->
+                                            <td><%= data[i].user['name'] %></td>
+                                            <%
+                                              var d = data[i].bookDate
+                                    
+                                              var dM = (d.getMonth()+1)
+                                              d = d.getDate().toString() + '-' + dM.toString().padStart(2, '0') + '-'  + d.getFullYear();
+
+                                              %>
+                                            <td><%= d %></td>
+                                            <td><%= data[i].court['name'] %></td>
+                                            <td><%= data[i].bookTime %></td>
+                                            <td>RM <%= data[i].total %></td>
+
                                             <td>
                                                 <a class="btn btn-sm btn-danger btn-circle"
-                                                    href="/api/admin/deluser/<%= data[i]._id%>"
-                                                    onclick="return confirm('Sure wants to delete the court?')"><i
+                                                    href="/api/customer/canbooking/<%= data[i]._id%>"
+                                                    onclick="return confirm('Sure wants to cancel the booking?')"><i
                                                         class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
+                                        <% } %>
+
+
                                     </tbody>
-                                    <% } %>
-                                    </thead>
-
-
                                 </table>
                             </div>
                         </div>
                     </div>
 
                 </div>
-                <!-- /.container-fluid -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             </div>
             <!-- End of Main Content -->
-
 
 
         </div>
@@ -210,6 +230,7 @@
         alert("<%= message.message %>")
     </script>
     <% } %>
+
 </body>
 
 </html>

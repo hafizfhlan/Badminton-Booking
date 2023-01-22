@@ -135,11 +135,12 @@
                                     <label class="labelInput" style="margin-left:25%;"
                                         for="court"><b>Court</b></label><br>
                                     <input class="inputBox" type="text" name="name" value=""
-                                        style="margin:auto; display:block; width:50%;text-align: center;" /><br>
+                                        style="margin:auto; display:block; width:50%;text-align: center;"
+                                        required /><br>
 
                                     <label style="margin-left:25%;" for="selectcourt">Status</label><br>
                                     <select class="form-control" name="status"
-                                        style="margin:auto; display:block; width:50%;text-align: center;">
+                                        style="margin:auto; display:block; width:50%;text-align: center;" required>
                                         <option value="" selected hidden>Status</option>
                                         <option value="available">Available</option>
                                         <option value="not available">Not-Available</option>
@@ -169,29 +170,42 @@
 
 
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <!-- Bootstrap core JavaScript-->
+            <script src="/vendor/jquery/jquery.min.js"></script>
+            <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+            <!-- Core plugin JavaScript-->
+            <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="/js/sb-admin-2.min.js"></script>
+            <!-- Custom scripts for all pages-->
+            <script src="/js/sb-admin-2.min.js"></script>
 
 
-    <!-- Page level plugins -->
-<script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<script>
-$(document).ready(function() {
-   $('#dataTable').DataTable();
-})
-</script>
+            <!-- Page level plugins -->
+            <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+            <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+            <script>
+                $(document).ready(function () {
+                    $('#dataTable').DataTable();
+
+                    $("#accordionSidebar a").each(function (index, element) {
+                        if ($(element).attr('href') == window.location.pathname) {
+                            if ($(element).hasClass('collapse-item') == true) {
+                                $(element).parent().parent().parent().addClass("active");
+                                $(element).parent().parent().addClass("show");
+                                $(element).addClass("active");
+                            } else {
+                                $(element).parent().addClass("active");
+                            }
+                        }
+                    });
+                })
+            </script>
             <% if(message.message) {%>
-                <script>
-                    alert("<%= message.message %>")
-                </script>
+            <script>
+                alert("<%= message.message %>")
+            </script>
             <% } %>
 </body>
 

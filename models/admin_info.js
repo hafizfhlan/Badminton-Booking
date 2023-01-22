@@ -1,14 +1,26 @@
 var bycrypt = require("bcryptjs");
 var mongoose = require("mongoose");
 
+/* A constant that is used to generate a salt for the password. */
 const SALT_FACTOR = 10;
 
+/* Creating a schema for the database. */
 var admin_infoSchema = new mongoose.Schema({
-	password: { type: String, required: true },
-	name: { type: String, required: true },
-	email: { type: String, required: true },
+	password: {
+		type: String,
+		required: true
+	},
+	name: {
+		type: String,
+		required: true
+	},
+	email: {
+		type: String,
+		required: true
+	},
 });
 
+/* This is a function that is used to hash the password before saving it to the database. */
 admin_infoSchema.pre("save", function (done) {
 	var admin = this;
 	if (!admin.isModified("password")) {
@@ -28,6 +40,7 @@ admin_infoSchema.pre("save", function (done) {
 	});
 });
 
+/* This is a function that is used to check if the password is correct. */
 admin_infoSchema.methods.checkPassword = function (guess, done) {
 	if (this.password != null) {
 		bycrypt.compare(guess, this.password, function (err, isMatch) {
@@ -36,5 +49,8 @@ admin_infoSchema.methods.checkPassword = function (guess, done) {
 	}
 };
 
+/* Creating a model for the database. */
 const AdminInfo = mongoose.model("admin", admin_infoSchema);
-module.exports = { AdminInfo };
+module.exports = {
+	AdminInfo
+};
