@@ -42,42 +42,81 @@ var transport = nodemailer.createTransport({
 
 
 /* Creating a route for the register page. */
+// router.post("/register", async function (req, res, next) {
+// 	if (
+// 		!req.body.username ||
+// 		!req.body.email ||
+// 		!req.body.phoneNo ||
+// 		!req.body.password ||
+// 		!req.body.passwordConf
+// 	) {
+// 		alert("Fill in all detail required");
+// 	} else {
+// 		CustomerInfo.findOne({
+// 			email: req.body.email
+// 		}).then((customer) => {
+// 			if (customer) {
+// 				// req.flash("message", "Email already registered")
+// 				return res.render("register.ejs",{msg: "Email already registered!"});
+// 			} else {
+// 				if (req.body.password != req.body.passwordConf) {
+// 					alert("Wrong password input");
+// 				} else {
+// 					const data = new CustomerInfo({
+// 						name: req.body.username,
+// 						email: req.body.email,
+// 						phoneNo: req.body.phoneNo,
+// 						password: req.body.password,
+// 					});
+// 					data.save()
+// 						.then(() => {
+// 							req.flash("message", "Registration success")
+// 							// alert("Registration success");
+// 							res.render("login");
+// 						})
+// 						.catch((err) => console.log(err));
+// 				}
+// 			}
+// 		});
+// 	}
+// });
+
 router.post("/register", async function (req, res, next) {
-	if (
-		!req.body.username ||
-		!req.body.email ||
-		!req.body.phoneNo ||
-		!req.body.password ||
-		!req.body.passwordConf
-	) {
-		alert("Fill in all detail required");
-	} else {
-		CustomerInfo.findOne({
-			email: req.body.email
-		}).then((customer) => {
-			if (customer) {
-				alert("Email already registered");
-			} else {
-				if (req.body.password != req.body.passwordConf) {
-					alert("Wrong password input");
-				} else {
-					const data = new CustomerInfo({
-						name: req.body.username,
-						email: req.body.email,
-						phoneNo: req.body.phoneNo,
-						password: req.body.password,
-					});
-					data.save()
-						.then(() => {
-							alert("Registration success");
-							res.render("index");
-						})
-						.catch((err) => console.log(err));
-				}
-			}
-		});
-	}
+    if (!req.body.username ||
+        !req.body.email ||
+        !req.body.phoneNo ||
+        !req.body.password ||
+        !req.body.passwordConf ||
+        !req.body.terms) {
+        alert("Fill in all detail required and accept the terms and conditions");
+    } else {
+        CustomerInfo.findOne({
+            email: req.body.email
+        }).then((customer) => {
+            if (customer) {
+                return res.render("register.ejs",{msg: "Email already registered!"});
+            } else {
+                if (req.body.password != req.body.passwordConf) {
+                    alert("Wrong password input");
+                } else {
+                    const data = new CustomerInfo({
+                        name: req.body.username,
+                        email: req.body.email,
+                        phoneNo: req.body.phoneNo,
+                        password: req.body.password,
+                    });
+                    data.save()
+                        .then(() => {
+                            req.flash("message", "Registration success")
+                            res.render("login");
+                        })
+                        .catch((err) => console.log(err));
+                }
+            }
+        });
+    }
 });
+
 
 /* Creating a route for the login page. */
 router.post("/login", function (req, res, next) {
@@ -133,6 +172,8 @@ router.put("/updprofile", (req, res) => {
 		}
 	})
 })
+
+
 
 /* The above code is checking if the email and password is correct. If it is correct, it will render
 the userdashboard page. */
@@ -557,5 +598,7 @@ router.get('/getAvailableTime/:date/:court', (req, res) => {
 	}
 
 })
+
+
 
 module.exports = router;

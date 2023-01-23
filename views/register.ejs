@@ -51,6 +51,17 @@
     });
 </script>
 
+<script>
+    function showTnc() {
+        var x = document.getElementById("tnc");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>
+
 <body class="bg-gradient-warning">
 
     <div class="container">
@@ -62,9 +73,14 @@
                         <div class="p-5">
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                                <%if(msg == 'Email already registered!'){%>
+                                <p style="color: red;"><%=msg %> </p>
+                                <%}%>
                             </div>
 
+                            
                             <form class="user" id="form1" method="post" action="/api/customer/register">
+                                <!-- form inputs go here -->
                                 <div class="form-group">
                                     <input type="text" name="username" class="form-control form-control-user"
                                         placeholder="Username" required>
@@ -85,14 +101,96 @@
                                     <input type="password" name="passwordConf" class="form-control form-control-user"
                                         placeholder="Password Confirmation" required>
                                 </div>
-                                <!-- <a href="login.html" class="btn btn-primary btn-user btn-block">Register Account</a> -->
-                                <input type="submit" value="Register" id="aa"
-                                    class="btn btn-warning btn-user btn-block">
-                                <hr>
+                                <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="terms" name="terms" required>
+                                    <label class="form-check-label" for="terms">I accept the <a href="#" data-toggle="modal" data-target="#termsModal">Terms and Conditions</a></label>
+                                </div>
+                                <input class="btn btn-warning btn-user btn-block" type="submit" value="Register Account">
                             </form>
+                            
+                            <!-- The Modal -->
+                            <div class="modal" id="termsModal" style="display:none;">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                            
+                                  <!-- Modal Header -->
+                                  <div class="modal-header">
+                                    <h4 class="modal-title">Terms and Conditions</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  </div>
+                            
+                                  <!-- Modal body -->
+                                  <div class="modal-body">
+                                    <p align="justify">
+                                        Terms and Conditions
+                                        <br>
+                                        <br>
+                                        1. Introduction
+                                        <br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp; By registering through our system, you agree to the following terms and conditions.
+                                        <br>
+                                        <br>
+                                        2. Eligibility
+                                        <br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp; You must provide accurate and complete information when registering. You must meet the criteria set by the
+                                        organizer to be eligible to participate in the event or program.
+                                        <br>
+                                        <br>
+                                        3. Liability
+                                        <br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp; You agree to participate in the event or program at your own risk. The organizers shall not be held liable for
+                                        any injury or damage incurred during participation.
+                                        <br>
+                                        <br>
+                                        4. Code of Conduct
+                                        <br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp; You agree to adhere to the code of conduct set by the organizers, which includes but is not limited to: respect
+                                        for other participants, no use of illegal substances, and no discrimination.
+                                        <br>
+                                        <br>
+                                        5. Changes to the Terms and Conditions
+                                        <br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp; The organizers reserve the right to change the terms and conditions at any time. You are responsible for staying
+                                        informed of any changes.
+                                        <br>
+                                        <br>
+                                        6. Governing Law
+                                        <br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp; These terms and conditions shall be governed and construed in accordance with the laws of the country in which
+                                        the event or program is being held.
+                                        <br>
+                                        <br>
+                                        By registering, you confirm that you have read and agree to the above terms and conditions.
+                                    </p>
+                                  </div>
+                            
+                                  <!-- Modal footer -->
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                  </div>
+                            
+                                </div>
+                              </div>
+                            </div>
+                            
 
+
+                                
+                
+                                <!-- <p>By clicking accept, you agree to our <a href="#" onclick="showTnc()">Terms and Conditions</a>.</p>
+                                <div id="tnc" style="display:none;">
+                                  <iframe src="/termsCondition" height="200" width="500"></iframe>
+                                </div> -->
+                                
+                                <!-- <input class="btn btn-warning btn-user btn-block" type="submit" value="Register Account"> -->
+                            </form>
                             <hr>
+                            <div class="text-center">
+                                <a class="small" href="/login">Back to Login!</a>
+                                <br>
+                            </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -121,10 +219,14 @@
         })
     </script>
     <% if(message.message) {%>
-    <script>
-        alert("<%= message.message %>")
-    </script>
-    <% } %>
+                                <script>
+                                    alert("<%= message.message %>")
+                                </script>
+                                <% } %>
+
+                                <script>
+
+                                </script>
 </body>
 
 </html>

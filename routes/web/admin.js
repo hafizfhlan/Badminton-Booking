@@ -62,6 +62,8 @@ router.get("/adminaddcourt", function (req, res) {
     res.render("admin/adminaddcourt");
 })
 
+
+
 /* A function that will render the admineditcourt page. */
 router.get("/admineditcourt/:id", function (req, res) {
     // console.log(req.params)

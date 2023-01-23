@@ -75,6 +75,7 @@ app.use('/scss', express.static(path.resolve(__dirname, "asset/scss")))
 app.use("/", require("./routes/web"));
 app.use("/api", require("./routes/api"));
 
+
 /* Listening to the port 3000. */
 app.listen(app.get("port"), function () {
     console.log("Server started at port " + app.get("port"));

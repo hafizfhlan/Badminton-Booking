@@ -21,7 +21,7 @@ function buildPDF(dataCallback, endCallback) {
   bookInfo.find().populate({
     path: "user",
     select: {
-      'email': 1
+      'password': 0
     }
   }).populate({
     path: "court"
@@ -34,34 +34,38 @@ function buildPDF(dataCallback, endCallback) {
     doc.on('end', endCallback);
 
     generateHeader(doc);
-
+    let total = data.reduce((acc, book) => acc + book.total, 0);
 
     doc
       .fillColor('black')
       .fontSize(12)
       .text('No', 50, 150)
-      .text('Booking Date', 100, 150)
-      .text('Court', 200, 150)
-      .text('Time', 250, 150)
-      .text('Name', 300, 150)
-      .text('Phone', 350, 150)
-      .text('Price (RM)', 500, 150)
+      .text('Booking Date', 80, 150)
+      .text('Court', 180, 150)
+      .text('Time', 230, 150)
+      .text('Name', 330, 150)
+      .text('Phone', 410, 150)
+      .text('Price (RM)', 510, 150)
 
     data.forEach(book => {
       for (let i = 0; i < data.length; i++) {
         let book = data[i];
-        let y = 180 + (i * 20);
+        let y = 180 + (i * 30);
         doc
           .text(i + 1, 50, y)
-          .text(formatDate(new Date(book.bookDate)), 100, y)
-          .text(book.court.name, 200, y)
-          .text(book.bookTime, 250, y)
-          .text(book.user.name, 300, y)
-          .text(book.user.phoneNo, 350, y)
-          .text(book.court.price, 400, y)
-
+          .text(formatDate(new Date(book.bookDate)), 80, y)
+          .text(book.court.name, 180, y)
+          .text(book.bookTime, 230, y)
+          .text(book.user.name, 330, y)
+          .text(book.user.phoneNo, 410, y)
+          .text(book.total, 510, y)
       }
-
+      let y = 180 + (data.length * 30);
+doc
+  .moveTo(50, y-10)
+  .lineTo(550, y-10)
+  .stroke()
+  .text("Grand Total: RM " + total, 420, y)
 
     });
     // generateInvoiceTable(doc, dataCallback);

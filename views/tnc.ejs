@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p align="justify">
+        Terms and Conditions
+        <br>
+        <br>
+        1. Introduction
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; By registering through our system, you agree to the following terms and conditions.
+        <br>
+        <br>
+        2. Eligibility
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; You must provide accurate and complete information when registering. You must meet the criteria set by the
+        organizer to be eligible to participate in the event or program.
+        <br>
+        <br>
+        3. Liability
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; You agree to participate in the event or program at your own risk. The organizers shall not be held liable for
+        any injury or damage incurred during participation.
+        <br>
+        <br>
+        4. Code of Conduct
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; You agree to adhere to the code of conduct set by the organizers, which includes but is not limited to: respect
+        for other participants, no use of illegal substances, and no discrimination.
+        <br>
+        <br>
+        5. Changes to the Terms and Conditions
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; The organizers reserve the right to change the terms and conditions at any time. You are responsible for staying
+        informed of any changes.
+        <br>
+        <br>
+        6. Governing Law
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; These terms and conditions shall be governed and construed in accordance with the laws of the country in which
+        the event or program is being held.
+        <br>
+        <br>
+        By registering, you confirm that you have read and agree to the above terms and conditions.
+    </p>
+    <!-- <input type="radio" id="aa" name="aa" value="aa" checked required>
+    <label for="male">Accept</label>
+    <input type="radio" id="aa" name="aa" value="aa" checked required>
+    <label for="male">Decline</label> -->
+    <form>
+        <br>
+  <label for="terms">Do you accept the terms and conditions?</label>
+  <br>
+  <input type="radio" id="accept" name="terms" value="accept" required>
+  <label for="accept">Accept</label>
+  <br>
+  <input type="radio" id="decline" name="terms" value="decline" required>
+  <label for="decline">Decline</label>
+  <br>
+  <input type="submit" value="Submit">
+      </form>
+      
+      <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            var terms = document.querySelector('input[name="terms"]');
+            if (!terms.checked) {
+              alert("You must accept the terms and conditions to continue.");
+              e.preventDefault();
+            }
+          });
+        
+      </script>
+</body>
+
+
+</html>

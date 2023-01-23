@@ -38,10 +38,10 @@ router.get("/login", function (req, res) {
 })
 
 
-
 router.get("/dashboard", function (req, res) {
 	res.render("userdashboard");
 })
+
 
 
 /* This is a route handler for the userprofile page. */
@@ -54,7 +54,7 @@ router.get("/userprofile", function (req, res, next) {
 				name: data.name,
 				email: data.email,
 				phoneNo: data.phoneNo,
-				userID: data.id
+				userID: data.id,
 			});
 		} else {
 			res.render("userdashboard");

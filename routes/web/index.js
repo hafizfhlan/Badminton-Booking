@@ -18,15 +18,15 @@ router.get("/login", function (req, res) {
 })
 
 router.get("/register", function (req, res) {
-	res.render("register")
+	res.render("register",{msg:""})
 })
 
 router.get("/userprofile", function (req, res) {
 	res.render("userprofile");
 })
 
-router.get("/guestbooking", function (req, res) {
-	res.render("guestbooking")
+router.get("/termsCondition", function (req, res) {
+	res.render("tnc")
 })
 
 
