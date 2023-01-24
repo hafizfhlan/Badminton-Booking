@@ -165,12 +165,11 @@
 
                                 </select><br>
 
-                                <label style="margin-left:25%;" id="pp"></label><br>
+                                <input type="text" style="margin:auto; display:block; width:50%;text-align: center;" readonly placeholder="Total Price (RM)" id="pp" class="form-control"/>
                                 <input type="hidden" name="price" id="price" />
-                                <!-- <input class="btn btn-success btn-icon-split" href="tables.html" style=" margin:auto; display:block; margin-top:30px; width:50%;" type="submit" name="submit" value="submit" /> -->
                                 <input type="submit" id="aa" class="btn btn-sm btn-warning btn-icon-split"
                                     onclick="return confirm('Confirm booking?')"
-                                    style="margin:auto; display:block; margin-top:30px; width:50%;"></input>
+                                    style="margin:auto; display:block; margin-top:30px; width:50%;">
 
                             </form>
 
@@ -210,7 +209,6 @@
                 <script>
                     $(document).ready(function () {
                         $('#dataTable').DataTable(); 
-                        <!--$('#time').multiselect();-- >
 
 
                         function isWeekend(date) {
@@ -286,13 +284,13 @@
                         $('#time').on("change", function () {
                             if (isWeekend($('#date').val())) {
                                 if ($('#time').val() != "") {
-                                    $('#pp').text('RM ' + < %= cp[0].price % > )
-                                    $('#price').val( < %= cp[0].price % > )
+                                    $('#pp').val('RM ' + <%= cp[0].price %> )
+                                    $('#price').val( <%= cp[0].price %> )
                                 }
                             } else {
                                 if ($('#time').val() != "") {
-                                    $('#pp').text('RM ' + < %= cp[1].price % > )
-                                    $('#price').val( < %= cp[1].price % > )
+                                    $('#pp').val('RM ' + <%= cp[1].price %> )
+                                    $('#price').val( <%= cp[1].price %> )
                                 }
                             }
                         })

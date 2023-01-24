@@ -26,7 +26,16 @@ const {
 
 
 router.get("/admindashboard", function (req, res) {
-    res.render("admin/admindashboard");
+    CustomerInfo.find({}, (err, data1) => {
+        bookInfo.find({}, (err, data2) => {
+            if(data1 || data2){
+                var userCount = data1.length;
+                var bookCount = data2.length;
+
+                res.render("admin/admindashboard", {userCount, bookCount});
+            }
+        })
+    })
 })
 
 
@@ -40,6 +49,7 @@ router.get("/adminviewuser", function (req, res) {
         });
     })
 })
+
 
 router.get("/register", function (req, res) {
     res.render("admin/register");
@@ -77,7 +87,6 @@ router.get("/admineditcourt/:id", function (req, res) {
     // })
     courtInfo.findById(req.params.id, (err, data) => {
         if (data) {
-            console.log(data)
             res.render("admin/admineditcourt", {
                 data: data
             });
@@ -122,7 +131,6 @@ router.get("/admineditbooking/:id", function (req, res) {
         path: "court",
     }).exec().then((data) => {
         courtInfo.find({}, (err, dataCourt) => {
-            console.log(dataCourt)
             res.render("admin/admineditbooking", {
                 id: req.params.id,
                 data: data,

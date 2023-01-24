@@ -35,46 +35,41 @@ function buildPDF(dataCallback, endCallback) {
 
     generateHeader(doc);
     let total = data.reduce((acc, book) => acc + book.total, 0);
+    data.sort((a, b) => new Date(a.bookDate) - new Date(b.bookDate));
 
-    doc
-      .fillColor('black')
-      .fontSize(12)
-      .text('No', 50, 150)
-      .text('Booking Date', 80, 150)
-      .text('Court', 180, 150)
-      .text('Time', 230, 150)
-      .text('Name', 330, 150)
-      .text('Phone', 410, 150)
-      .text('Price (RM)', 510, 150)
+  doc.fillColor('black')
+  .fontSize(10)
+  .font('Helvetica')
 
-    data.forEach(book => {
-      for (let i = 0; i < data.length; i++) {
-        let book = data[i];
-        let y = 180 + (i * 30);
-        doc
-          .text(i + 1, 50, y)
-          .text(formatDate(new Date(book.bookDate)), 80, y)
-          .text(book.court.name, 180, y)
-          .text(book.bookTime, 230, y)
-          .text(book.user.name, 330, y)
-          .text(book.user.phoneNo, 410, y)
-          .text(book.total, 510, y)
-      }
-      let y = 180 + (data.length * 30);
-doc
-  .moveTo(50, y-10)
-  .lineTo(550, y-10)
+// Create table headers
+doc.text("No", 50, 150, { fontSize: 10, fontStyle: 'bold' });
+doc.text("Booking Date", 80, 150, { fontSize: 10, fontStyle: 'bold' });
+doc.text("Court", 180, 150, { fontSize: 10, fontStyle: 'bold' });
+doc.text("Time", 230, 150, { fontSize: 10, fontStyle: 'bold' });
+doc.text("Name", 330, 150, { fontSize: 10, fontStyle: 'bold' });
+doc.text("Phone", 410, 150, { fontSize: 10, fontStyle: 'bold' });
+doc.text("Price (RM)", 510, 150, { fontSize: 10, fontStyle: 'bold' });
+
+// Create table rows for each book
+data.forEach((book, index) => {
+ let y = 180 + (index * 25);
+ doc.text(index + 1, 50, y, { fontSize: 10 });
+ doc.text(formatDate(new Date(book.bookDate)), 80, y, { fontSize: 10 });
+ doc.text(book.court.name, 180, y, { fontSize: 10 });
+ doc.text(book.bookTime, 230, y, { fontSize: 10 });
+ doc.text(book.user.name, 330, y, { fontSize: 10 });
+ doc.text(book.user.phoneNo, 410, y, { fontSize: 10 });
+ doc.text(book.total, 510, y, { fontSize: 10 });
+});
+
+// Draw line and add grand total at the bottom
+let y = 180 + (data.length * 25);
+doc.moveTo(50, y-10)
+  .lineTo(750, y-10)
   .stroke()
-  .text("Grand Total: RM " + total, 420, y)
+  .text("Grand Total: RM " + total, 420, y, { fontSize: 12 });
 
-    });
-    // generateInvoiceTable(doc, dataCallback);
     generateFooter(doc);
-
-
-
-
-    doc.end();
   })
 
 
@@ -100,36 +95,20 @@ doc
       .moveDown();
   }
 
-  function generateInvoiceTable(doc, dataCallback) {
-    let i;
-    const invoiceTableTop = 330;
 
-    doc.font("Helvetica-Bold");
-    generateTableRow(
-      doc,
-      invoiceTableTop,
-      "Name",
-      "Court",
-      "Time",
-      "Date",
-      "Price (RM)"
-    );
-    generateHr(doc, invoiceTableTop + 20);
-    doc.font("Helvetica");
-  }
-
+  let pageCounter = 0;
   function generateFooter(doc) {
-    doc
-      .fontSize(10)
-      .text(
-        "Report for Court Booking System",
-        50,
-        780, {
-          align: "center",
-          width: 500
-        }
-      );
+    pageCounter++;
+    doc.text("Report for Court Booking System - Page " + pageCounter + " of " + pageCounter, 50, 780, {
+      align: "center",
+      width: 500
+    });
+    doc.end();
   }
+  
+  
+
+
 
   function formatDate(date) {
     const day = date.getDate();

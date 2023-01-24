@@ -19,6 +19,7 @@ const {
 } = require("mongoose");
 
 
+
 var router = express.Router();
 
 /* This is a route handler. It is a function that is called when a request is made to the route. */
@@ -69,7 +70,7 @@ router.post("/login", function (req, res, next) {
 					if (doMatch) {
 						req.session.email = data.email;
 						// session = req.session.email;
-						res.render("admin/admindashboard");
+						res.redirect("/admin/admindashboard");
 					} else {
 						alert("Wrong password input");
 					}
@@ -207,7 +208,7 @@ router.get("/delcourt/:id", (req, res) => {
 router.get("/delbook/:id", (req, res) => {
 	bookInfo.findByIdAndRemove(req.params.id, function (err, result) {
 		if (!err) {
-			req.flash('message', 'Booking removed successfully!');
+			swal('message', 'Booking removed successfully!');
 			res.redirect('/admin/adminhistorybooking');
 		} else {
 			req.flash('message', 'Failed to removed the booking!');

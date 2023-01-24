@@ -9,10 +9,13 @@ var session = require("express-session");
 const passport = require("passport");
 const MongoDBStore = require('connect-mongodb-session')(session);
 var methodOverride = require('method-override')
+const swal = require('sweetalert2');
 // var bootstrap = require("bootstrap");
 // const ejsLint = require("ejs-lint");
 
 var app = express();
+
+
 
 /* Connecting to the database. */
 mongoose.connect(
@@ -25,6 +28,8 @@ mongoose.connect(
     }
 );
 
+
+  
 app.set("port", process.env.PORT || 3000);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");

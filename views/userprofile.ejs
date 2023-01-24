@@ -116,95 +116,89 @@
 
 
 
-
-
-                    <div class="container">
+                    <div class="container" style="background-color:beige; background-size: cover;">
                         <div class="row justify-content-center">
-                            <div class="col-12 col-sm-8 col-lg-6">
-                                <!-- Section Heading-->
-                                <div class="section_heading text-center wow fadeInUp" data-wow-delay="0.2s"
-                                    style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-                                    <h3><span>User Profile </span></h3>
-
+                            <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+                                <div class="section_heading text-center">
+                                    <h2 class="font-weight-bold">User Profile</h2>
+                                    <hr class="divider my-4">
                                 </div>
                             </div>
                         </div>
-
-
-
-
-                        <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.3s"
-                            style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
-                            <!-- Team Thumb-->
-                            <div class="advisor_thumb" style="display: flex;justify-content: center;"><img
-                                    src="https://bootdey.com/img/Content/avatar/avatar7.png"></div>
-                            <!-- Team Details-->
-                            <div class="single_advisor_details_info">
-                                <p class="designation">ID: <%= userID %>
-                                    <p class="designation">Name: <%= name %></p>
-                                    <p class="designation">Email: <%= email %></p>
-                                    <p class="designation">Phone No: <%= phoneNo %></p>
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+                                <div class="advisor-profile-container">
+                                    <div class="advisor-profile-card">
+                                        <table class="advisor-profile-table">
+                                            <tr>
+                                                <td rowspan="5">
+                                                    <div class="advisor-img-container">
+                                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Advisor Profile Image" style="width: 150px; height: 150px; border-radius: 50%;">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <p class="advisor-name">Name: <%= name %> </p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <p class="advisor-email">Email: <%= email %></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <p class="advisor-phone">Phone No: <%= phoneNo %></p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <div class="advisor-edit-container" style="display: flex; justify-content: center; margin-top: 20px;">
+                                            <a href="/customer/editprofile" class="btn btn-warning">Edit Profile</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        
-
-
-                        <div class="container" style="position: relative;">
-                            <div class="center"
-                                style="margin: 0;position: absolute;top: 50%;left: 50%;-ms-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">
-                                <!-- <button class="btn btn-warning"> -->
-                                <!-- <a class="" href="/customer/editprofile" >Edit Profile </a> -->
-                                <a href="/customer/editprofile" class="btn btn-warning ">Edit Profile</a>
-
-                                </button>
-                            </div>
-                        </div>
-
-
-
-
-
-
-                        <!-- Bootstrap core JavaScript-->
-                        <script src="/vendor/jquery/jquery.min.js"></script>
-                        <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-                        <!-- Core plugin JavaScript-->
-                        <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-                        <!-- Custom scripts for all pages-->
-                        <script src="/js/sb-admin-2.min.js"></script>
-
-
-                        <!-- Page level plugins -->
-                        <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-                        <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-                        <script>
-                            $(document).ready(function () {
-                                $('#dataTable').DataTable();
-
-                                $("#accordionSidebar a").each(function (index, element) {
-                                    if ($(element).attr('href') == window.location.pathname) {
-                                        if ($(element).hasClass('collapse-item') == true) {
-                                            $(element).parent().parent().parent().addClass("active");
-                                            $(element).parent().parent().addClass("show");
-                                            $(element).addClass("active");
-                                        } else {
-                                            $(element).parent().addClass("active");
-                                        }
-                                    }
-                                });
-                            })
-                        </script>
-                        <% if(message.message) {%>
-                        <script>
-                            alert("<%= message.message %>")
-                        </script>
-                        <% } %>
                     </div>
-                </div>
-
-
 </body>
+
+
+<!-- Bootstrap core JavaScript-->
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="/js/sb-admin-2.min.js"></script>
+
+
+<!-- Page level plugins -->
+<script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#dataTable').DataTable();
+
+        $("#accordionSidebar a").each(function (index, element) {
+            if ($(element).attr('href') == window.location.pathname) {
+                if ($(element).hasClass('collapse-item') == true) {
+                    $(element).parent().parent().parent().addClass("active");
+                    $(element).parent().parent().addClass("show");
+                    $(element).addClass("active");
+                } else {
+                    $(element).parent().addClass("active");
+                }
+            }
+        });
+    })
+</script>
+<% if(message.message) {%>
+<script>
+    alert("<%= message.message %>")
+</script>
+<% } %>
 
 </html>
