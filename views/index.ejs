@@ -28,6 +28,8 @@
   <link href="/vendor/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- leaflet css  -->
+  <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet"
@@ -102,49 +104,6 @@
   </section><!-- End Hero -->
 
 
-
-  <!-- ======= Values Section ======= -->
-  <!-- <section id="us" class="values">
-
-      <div class="container" data-aos="fade-up">
-
-        <header class="section-header">
-          <h2>Our Values</h2>
-          <p>Odit est perspiciatis laborum et dicta</p>
-        </header>
-
-        <div class="row">
-
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
-            <div class="box">
-              <img src="img/values-1.png" class="img-fluid" alt="">
-              <h3>Ad cupiditate sed est odio</h3>
-              <p>Eum ad dolor et. Autem aut fugiat debitis voluptatem consequuntur sit. Et veritatis id.</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="400">
-            <div class="box">
-              <img src="img/values-2.png" class="img-fluid" alt="">
-              <h3>Voluptatem voluptatum alias</h3>
-              <p>Repudiandae amet nihil natus in distinctio suscipit id. Doloremque ducimus ea sit non.</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="600">
-            <div class="box">
-              <img src="img/values-3.png" class="img-fluid" alt="">
-              <h3>Fugit cupiditate alias nobis.</h3>
-              <p>Quam rem vitae est autem molestias explicabo debitis sint. Vero aliquid quidem commodi.</p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-    End Values Section -->
 
   <!-- ======= Counts Section ======= -->
   <section id="counts" class="counts">
@@ -269,11 +228,6 @@
         // Map initialization 
         var map = L.map('map').setView([3.0733, 101.5185], 11);
 
-
-        /* ==================================================
-        |                 MAP VARIATION
-        =====================================================*/
-
         //osm layer
         var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -292,13 +246,8 @@
           maxZoom: 20,
           subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
         });
-        // googleSat.addTo(map)
 
-        /* ==================================================
-        |                 LAYER CONTROL 
-        =====================================================*/
 
-        //layer controller
         var baseMaps = {
           "OSM": osm,
           'Google Street': googleStreets,
@@ -307,24 +256,34 @@
 
         L.control.layers(baseMaps).addTo(map);
 
-
-        /* ==================================================
-        |                 MARKING
-        =====================================================*/
         var singleMaker = L.marker([3.0698, 101.5037]);
         var popup = singleMaker.bindPopup('<a href = https://goo.gl/maps/34T3kzhnQf23tE8T9 target="_blank">Court Location</a>').openPopup()
         popup.addTo(map);
-
-
         console.log(singleMaker.toGeoJSON())
-
-
         L.control.locate().addTo(map);
-
-        /* ==================================================
-        |                 SEARCH
-        =====================================================*/
         L.Control.geocoder().addTo(map);
+
+        navigator.geolocation.getCurrentPosition(getPosition)
+
+function getPosition(position){
+    var lat = position.coords.latitude;
+    var long = position.coords.longitude;
+    var accuracy = position.coords.accuracy;
+
+    var marker = L.marker([lat,long]).addTo(map);
+    var circle = L.circle([lat,long],{radius: accuracy}).addTo(map);
+
+    L.Routing.control({
+      waypoints: [
+        L.latLng([3.0698,101.5037]),
+        L.latLng([3.0546, 101.4913])
+      ],
+      router: new L.Routing.OSRM(),
+      routeWhileDragging: true,
+      showAlternatives: true,
+    }).addTo(map);
+}
+
       </script>
     </div>
 
