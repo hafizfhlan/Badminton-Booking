@@ -144,7 +144,7 @@
 
                                         <select name="court" class="form-control" required>
                                             <option value="<%= data.court['_id'] %>" selected disabled>
-                                                <%= data.court['name']  %>
+                                                <td><%= data[i].court ? data[i].court.name : 'N/A' %></td>
                                             </option>
                                             <%
                                           for(var i=0;i<dataCourt.length;i++) {

@@ -55,7 +55,7 @@ data.forEach((book, index) => {
  let y = 180 + (index * 25);
  doc.text(index + 1, 50, y, { fontSize: 10 });
  doc.text(formatDate(new Date(book.bookDate)), 80, y, { fontSize: 10 });
- doc.text(book.court.name, 180, y, { fontSize: 10 });
+ doc.text(book.court ? book.court.name : 'N/A', 180, y, { fontSize: 10 });
  doc.text(book.bookTime, 230, y, { fontSize: 10 });
  doc.text(book.user.name, 330, y, { fontSize: 10 });
  doc.text(book.user.phoneNo, 410, y, { fontSize: 10 });

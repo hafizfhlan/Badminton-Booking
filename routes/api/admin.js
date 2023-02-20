@@ -208,7 +208,7 @@ router.get("/delcourt/:id", (req, res) => {
 router.get("/delbook/:id", (req, res) => {
 	bookInfo.findByIdAndRemove(req.params.id, function (err, result) {
 		if (!err) {
-			swal('message', 'Booking removed successfully!');
+			req.flash('message', 'Booking removed successfully!');
 			res.redirect('/admin/adminhistorybooking');
 		} else {
 			req.flash('message', 'Failed to removed the booking!');

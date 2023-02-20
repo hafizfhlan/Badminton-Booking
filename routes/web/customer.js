@@ -138,6 +138,7 @@ router.get("/history", (req, res, ) => {
 	}).populate({
 		path: "court",
 	}).exec().then((data) => {
+		console.log(data)
 		res.render("history.ejs", {
 			data: data
 		})

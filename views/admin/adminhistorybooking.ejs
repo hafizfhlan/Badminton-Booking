@@ -159,7 +159,7 @@
                                               d = d.getDate().toString() + '-' + dM.toString().padStart(2, '0') + '-'  + d.getFullYear();
                                               %>
                                             <td><%= d %></td>
-                                            <td><%= data[i].court['name'] %></td>
+                                            <td><%= data[i].court ? data[i].court.name : 'N/A' %></td>
                                             <td><%= data[i].bookTime %></td>
                                             <td>RM <%= data[i].total %></td>
 
