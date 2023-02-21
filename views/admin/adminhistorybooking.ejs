@@ -140,7 +140,6 @@
                                             <th>Court Name</th>
                                             <th>Time</th>
                                             <th>Total Price (RM)</th>
-                                            <th>Edit Booking</th>
                                             <th>Delete Booking</th>
 
 
@@ -164,11 +163,11 @@
                                             <td>RM <%= data[i].total %></td>
 
 
-                                            <td>
+                                            <!-- <td>
                                                 <a class="btn btn-sm btn-info btn-circle"
                                                     href="/admin/admineditbooking/<%= data[i]._id%>"><i
                                                         class="fa fa-edit"></i></a>
-                                            </td>
+                                            </td> -->
                                             <td>
                                                 <a class="btn btn-sm btn-danger btn-circle"
                                                     href="/api/admin/delbook/<%= data[i]._id%>"

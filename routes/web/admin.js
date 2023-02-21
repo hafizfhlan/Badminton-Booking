@@ -131,7 +131,9 @@ router.get("/admineditbooking/:id", function (req, res) {
         path: "court",
     }).exec().then((data) => {
         courtInfo.find({}, (err, dataCourt) => {
+            console.log()
             res.render("admin/admineditbooking", {
+                
                 id: req.params.id,
                 data: data,
                 dataCourt: dataCourt

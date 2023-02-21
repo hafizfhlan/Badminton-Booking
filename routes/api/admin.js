@@ -193,6 +193,7 @@ router.get("/deluser/:id", (req, res) => {
 
 /* A route handler. It is a function that is called when a request is made to the route. */
 router.get("/delcourt/:id", (req, res) => {
+	bookInfo.deleteMany({ court: req.params.id }, function (err, result) {
 	courtInfo.findByIdAndRemove(req.params.id, function (err, result) {
 		if (!err) {
 			req.flash('message', 'Court removed successfully!');
@@ -202,6 +203,7 @@ router.get("/delcourt/:id", (req, res) => {
 			res.redirect('/admin/admincourtmanage');
 		}
 	})
+})
 })
 
 /* A route handler. It is a function that is called when a request is made to the route. */
